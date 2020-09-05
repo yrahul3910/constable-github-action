@@ -28,7 +28,6 @@ async function run() {
       repo: 'rest.js',
       path: 'examples/getContent.js'
     })
-
     .then(result => {
       // content will be base64 encoded
       const content = Buffer.from(result.data.content, 'base64').toString()
