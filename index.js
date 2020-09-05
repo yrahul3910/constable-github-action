@@ -14,8 +14,26 @@ async function run() {
 
     // core.setOutput('time', new Date().toTimeString());
 
-    
+    //------------------------------------------------------------------------------------------------------    
+    const readme_maxPoints = 2;
+    const contributions_maxPoints = 1;
+    const conduct_maxPoints = 1;
+    const license_maxPoints = 1;
+    const gitignore_maxPoints = 1;
+    const citations_maxPoints = 1;
 
+    const octokit = require('.')()
+    octokit.repos.getContent({
+      owner: 'octokit',
+      repo: 'rest.js',
+      path: 'examples/getContent.js'
+    })
+
+    .then(result => {
+      // content will be base64 encoded
+      const content = Buffer.from(result.data.content, 'base64').toString()
+      console.log(content)
+    })    
 
 
   } catch (error) {

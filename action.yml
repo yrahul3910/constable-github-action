@@ -6,6 +6,9 @@ inputs:
   #   required: true
   #   default: '1000'
 outputs:
+  grade:
+    description: 'The output of this file will be a grade and percentage given to the repo.'
+    
   # time: # output will be available to future steps
   #   description: 'The message to output'
 runs:
