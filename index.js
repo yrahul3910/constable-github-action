@@ -1,43 +1,77 @@
 const core = require('@actions/core');
 const wait = require('./wait');
-
-
-// most @actions toolkit packages have async methods
-async function run() {
-  try {
-    // const ms = core.getInput('milliseconds');
-    // core.info(`Waiting ${ms} milliseconds ...`);
-
-    // core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-    // await wait(parseInt(ms));
-    // core.info((new Date()).toTimeString());
-
-    // core.setOutput('time', new Date().toTimeString());
-
-    //------------------------------------------------------------------------------------------------------    
-    const readme_maxPoints = 2;
+const readme_maxPoints = 2;
     const contributions_maxPoints = 1;
     const conduct_maxPoints = 1;
     const license_maxPoints = 1;
     const gitignore_maxPoints = 1;
     const citations_maxPoints = 1;
+    let total_score = 0;
+    const testFolder = '.';
+    const fs = require('fs');
 
-    const octokit = require('.')()
-    octokit.repos.getContent({
-      owner: 'octokit',
-      repo: 'rest.js',
-      path: 'examples/getContent.js'
-    })
-    .then(result => {
-      // content will be base64 encoded
-      const content = Buffer.from(result.data.content, 'base64').toString()
-      console.log(content)
-    })    
+    fs.readdir(testFolder, (err, files) => {
+      files.forEach(file => {
+        if(file == 'README.md'){
+          total_score = total_score+2;
+        }
+        if(file == 'CONTRIBUTING.md'){
+          total_score = total_score+1;
+        }
+        if(file == 'CODE-OF-CONDUCT.md'){
+          total_score = total_score+1;
+        }
+        if(file == 'LICENSE'){
+          total_score = total_score+1;
+        }
+        if(file == 'CITATION.md'){
+          total_score = total_score+1;
+        }
+        // console.log(1);
+        // console.log(file);
+      });
+    });
+    console.log(`total_score =  ` + total_score);
 
+// most @actions toolkit packages have async methods
+// async function run() {
+//   try {
+//     const readme_maxPoints = 2;
+//     const contributions_maxPoints = 1;
+//     const conduct_maxPoints = 1;
+//     const license_maxPoints = 1;
+//     const gitignore_maxPoints = 1;
+//     const citations_maxPoints = 1;
+//     let total_score = 0;
+//     const testFolder = '.';
+//     const fs = require('fs');
 
-  } catch (error) {
-    core.setFailed(error.message);
-  }
-}
+//     fs.readdir(testFolder, (err, files) => {
+//       files.forEach(file => {
+//         if(file == 'README.md'){
+//           total_score = total_score+2;
+//         }
+//         if(file == 'CONTRIBUTING.md'){
+//           total_score = total_score+1;
+//         }
+//         if(file == 'CODE-OF-CONDUCT.md'){
+//           total_score = total_score+1;
+//         }
+//         if(file == 'LICENSE'){
+//           total_score = total_score+1;
+//         }
+//         if(file == 'CITATION.md'){
+//           total_score = total_score+1;
+//         }
+//         // console.log(1);
+//         // console.log(file);
+//       });
+//     });
+//     console.log(`total_score =  ` + total_score);
+    
+//   } catch (error) {
+//     core.setFailed(error.message);
+//   }
+// }
 
-run();
+// run();
