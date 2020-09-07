@@ -43,4 +43,47 @@ const fs = require('fs');
   }
 
   run();
-  console.log(`Score for this repo =  ` + (total_score/7)*100);
+  var score = (total_score/7)*100;
+  console.log(`Score for this repo =  ` + score);
+
+/*
+Grades Range:
+A+ : 95+
+A  : 90-94
+B+ : 85-89
+B  : 80-84
+C+ : 75-79
+C  : 70-74
+D+ : 65-69
+D  : 60-64
+Redo: 0-59
+*/
+
+if(score >= 95){
+  console.log("Grade: A+");
+}
+
+if(score >=90 && score <= 94){
+  console.log("Grade: A");
+}
+if(score >=85 && score <= 89){
+  console.log("Grade: B+");
+}
+if(score >=80 && score <= 84){
+  console.log("Grade: B");
+}
+if(score >=75 && score <= 79){
+  console.log("Grade: C+");
+}
+if(score >=70 && score <= 74){
+  console.log("Grade: C");
+}
+if(score >=65 && score <= 69){
+  console.log("Grade: D+");
+}
+if(score >=60 && score <= 64){
+  console.log("Grade: D");
+}
+if(score <= 59){
+  console.log("Grade: Redo");
+}
