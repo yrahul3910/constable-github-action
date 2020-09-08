@@ -1,114 +1,94 @@
-# Create a JavaScript Action
+# Constable
+
+Keeping repositories contributable.
 
 <p align="center">
-  <a href="https://github.com/actions/javascript-action/actions"><img alt="javscript-action status" src="https://github.com/actions/javascript-action/workflows/units-test/badge.svg"></a>
+  <a href="https://github.com/dangoslen/constable-github-action/actions"><img alt="constable-github-action-status" src="https://github.com/dangoslen/constable-github-action/workflows/units-test/badge.svg"></a>
 </p>
 
-Use this template to bootstrap the creation of a JavaScript action.:rocket:
+---
 
-This template includes tests, linting, a validation workflow, publishing, and versioning guidance.
+Constable is a simple GitHub action to grade your repositories contributability. Simple add the action to any GitHub Actions workflow you like and start seeing how contributable your repository is. A sample workflow is provided below:
 
-If you are new, there's also a simpler introduction.  See the [Hello World JavaScript Action](https://github.com/actions/hello-world-javascript-action)
+```yaml
+name: "units-test"
+on:
+  pull_request:
 
-## Create an action from this template
-
-Click the `Use this Template` and provide the new repo details for your action
-
-## Code in Main
-
-Install the dependencies
-
-```bash
-npm install
+jobs:
+  # Constable
+  pull-request-workflow:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: constable
+      uses: dangoslen/constable-github-action@v0.1
+    - name: Comment PR
+      uses: thollander/actions-comment-pull-request@master
+      with:
+        message: "
+# ![](https://img.shields.io/badge/Constable-${{ pull-request-workflow.constable.outputs.explanation }}-blue)
+<details>
+  <summary>Click to see the report!</summary>
+  ${{ pull-request-workflow.constable.outputs.explanation }}
+</details>"
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-Run the tests :heavy_check_mark:
+This workflow checks out the repository, grades it with Constable, and supplies the grade and the report to the pull request as a comment. You can combine Constable with whatever workflow you like!
 
-```bash
-$ npm test
+## Contributability Grade
 
- PASS  ./index.test.js
-  ✓ throws invalid number (3ms)
-  ✓ wait 500 ms (504ms)
-  ✓ test runs (95ms)
-...
-```
+Constable ranks contributability in "letter grades". A+/-, B+/-, C+/-, D+/-, F. For finer granularity, we also provide the raw percentage from 0 - 100 and a report in a `.md` format. The letter grades is determined from the raw percentage using a 10 point scale where the +/- is the top 3 points and bottom 3 points of each 10 point range.
 
-## Change action.yml
+## How is Contributability Calculated?
 
-The action.yml contains defines the inputs and output for your action.
+Constable looks for the presence of files that are associated with making it easy to contribute, as well as signs the repository is active. We currently use the following
 
-Update the action.yml with your name, description, inputs and outputs for your action.
+* Presence of a `README.md` file
+* Presence of a `CONTRIBUTING.md` file
+* Presence of a `CODE_OF_CONDUCT.md` file.
 
-See the [documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions)
+In the future, we plan to implement additional checks, as well as use sentiment analysis to make sure the files referenced are readable, reasonable, and non-judgemental.
 
-## Change the Code
+### What Makes a Repository Contributable to You?
 
-Most toolkit and CI/CD operations involve async operations so the action is run in an async function.
+Do you have an idea of how to grade a repository's contributability? We want you to contribute to this project! Please see our [Contributing](./CONTRIBUTING.md) file to how to contribute to Constable!
 
-```javascript
-const core = require('@actions/core');
-...
+## Constable Outputs
 
-async function run() {
-  try {
-      ...
-  }
-  catch (error) {
-    core.setFailed(error.message);
-  }
-}
+A summary of the outputs is listed below. You can also see this in the [Action Definition](./action.yml)
 
-run()
-```
+`grade` - a `string` containing the letter grade (A+/-, B+/-, C+/-, D+/-, F) of the repositories contributability.
+`score` - an `integer` from 0 - 100 of the
+`report` - a `string` containing a report of why the repository recieved the percentage it did. 
 
-See the [toolkit documentation](https://github.com/actions/toolkit/blob/master/README.md#packages) for the various packages.
+## What About the GitHub Community Insights?
+
+We think this effort from GitHub is a great start. However, many more elements of of a repository make it contributable than just a few files being present. The goal of Constable is to be a simple tool that can be used to extend what GitHub has started. Eventually, Constable would hope to be available to other providers like GitLab or BitBucket via a REST API.
+
+## Developing
+
+Before contributing to Constable, please see our [CONTRIBUTING.md](./CONTRIBUTION.md) file. All processes for adding features, reporting bugs, or asking questions can be found there.
+
+Constable uses the [GitHub Action Toolkit](https://github.com/actions/toolkit/blob/master/README.md#packages) for the various packages.
 
 ## Package for distribution
 
-GitHub Actions will run the entry point from the action.yml. Packaging assembles the code into one file that can be checked in to Git, enabling fast and reliable execution and preventing the need to check in node_modules.
-
-Actions are run from GitHub repos.  Packaging the action will create a packaged action in the dist folder.
-
-Run prepare
+Packaging for distribution happens automatically for every pull request or push to `main` or `releases`. If you want to package the source for distribution from your own branch before opening a pull request, you can simply run the following:
 
 ```bash
 npm run prepare
 ```
 
-Since the packaged index.js is run from the dist folder.
+Since the packaged `index.js` is run from the `./dist` folder.
 
 ```bash
 git add dist
 ```
 
-## Create a release branch
-
-Users shouldn't consume the action from master since that would be latest code and actions can break compatibility between major versions.
-
-Checkin to the v1 release branch
-
-```bash
-git checkout -b v1
-git commit -a -m "v1 release"
-```
-
-```bash
-git push origin v1
-```
-
-Your action is now published! :rocket:
-
-See the [versioning documentation](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
-
-## Usage
-
-You can now consume the action by referencing the v1 branch
+And now GitHub will know to use the action sourced under th `./dist` folder. You could use it in a workflow like 
 
 ```yaml
-uses: actions/javascript-action@v1
-with:
-  milliseconds: 1000
+uses: dangoslen/constable-github-action@<your-branch>
 ```
-
-See the [actions tab](https://github.com/actions/javascript-action/actions) for runs of this action! :rocket:

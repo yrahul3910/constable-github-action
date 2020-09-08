@@ -1,17 +1,17 @@
 {
-  "name": "javascript-action",
-  "version": "1.0.0",
-  "description": "JavaScript Action Template",
+  "name": "constable-github-action",
+  "version": "0.1.0",
+  "description": "GitHub Action for checking contributability",
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "prepare": "ncc build index.js -o dist --source-map",
+    "package": "ncc build index.js -o dist --source-map",
     "test": "jest",
-    "all": "npm run lint && npm run prepare && npm run test"
+    "all": "npm run lint && npm run package && npm run test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/javascript-action.git"
+    "url": "git+https://github.com/dangoslen/constable-github-action.git"
   },
   "keywords": [
     "GitHub",
@@ -21,14 +21,15 @@
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/actions/javascript-action/issues"
+    "url": "https://github.com/dangoslen/constable-github-action/issues"
   },
-  "homepage": "https://github.com/actions/javascript-action#readme",
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "homepage": "https://github.com/dangoslen/constable-github-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.5",
-    "@actions/github": "^4.0.0",
-    "canvasjs": "^1.8.3",
-    "chart.js": "^2.9.3"
+    "@actions/github": "^4.0.0"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.24.0",
