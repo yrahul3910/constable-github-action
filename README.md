@@ -63,6 +63,10 @@ A summary of the outputs is listed below. You can also see this in the [Action D
 `score` - an `integer` from 0 - 100 of the
 `report` - a `string` containing a report of why the repository recieved the percentage it did. 
 
+## What About the GitHub Community Insights?
+
+We think this effort from GitHub is a great start. However, many more elements of of a repository make it contributable than just a few files being present. The goal of Constable is to be a simple tool that can be used to extend what GitHub has started. Eventually, Constable would hope to be available to other providers like GitLab or BitBucket via a REST API.
+
 ## Developing
 
 Before contributing to Constable, please see our [CONTRIBUTING.md](./CONTRIBUTION.md) file. All processes for adding features, reporting bugs, or asking questions can be found there.
