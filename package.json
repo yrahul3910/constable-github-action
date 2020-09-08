@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "prepare": "ncc build index.js -o dist --source-map",
+    "package": "ncc build index.js -o dist --source-map",
     "test": "jest",
-    "all": "npm run lint && npm run prepare && npm run test"
+    "all": "npm run lint && npm run package && npm run test"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,9 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/dangoslen/constable-github-action/issues"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "homepage": "https://github.com/dangoslen/constable-github-action#readme",
   "dependencies": {
