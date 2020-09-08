@@ -60,8 +60,8 @@ Do you have an idea of how to grade a repository's contributability? We want you
 A summary of the outputs is listed below. You can also see this in the [Action Definition](./action.yml)
 
 `grade` - a `string` containing the letter grade (A+/-, B+/-, C+/-, D+/-, F) of the repositories contributability.
-`percentage` - an `integer` from 0 - 100 of the
-`explanation` - a `string` containing a report of why the repository recieved the percentage it did. 
+`score` - an `integer` from 0 - 100 of the
+`report` - a `string` containing a report of why the repository recieved the percentage it did. 
 
 ## Developing
 
