@@ -1,8 +1,9 @@
-# Constable
-
-Keeping repositories contributable.
-
 <p align="center">
+
+  <h1>Constable</h1>
+
+  <h2>Keeping repositories contributable.</h2>
+
   <a href="https://github.com/dangoslen/constable-github-action/actions"><img alt="constable-github-action-status" src="https://github.com/dangoslen/constable-github-action/workflows/units-test/badge.svg"></a>
 </p>
 
@@ -69,7 +70,7 @@ We think this effort from GitHub is a great start. However, many more elements o
 
 ## Developing
 
-Before contributing to Constable, please see our [CONTRIBUTING.md](./CONTRIBUTION.md) file. All processes for adding features, reporting bugs, or asking questions can be found there.
+Before contributing to Constable, please see our [CONTRIBUTING.md](./CONTRIBUTING.md) file. All processes for adding features, reporting bugs, or asking questions can be found there.
 
 Constable uses the [GitHub Action Toolkit](https://github.com/actions/toolkit/blob/master/README.md#packages) for the various packages.
 
@@ -78,7 +79,7 @@ Constable uses the [GitHub Action Toolkit](https://github.com/actions/toolkit/bl
 Packaging for distribution happens automatically for every pull request or push to `main` or `releases`. If you want to package the source for distribution from your own branch before opening a pull request, you can simply run the following:
 
 ```bash
-npm run prepare
+npm run package
 ```
 
 Since the packaged `index.js` is run from the `./dist` folder.

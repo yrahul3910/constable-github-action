@@ -1,12 +1,22 @@
-# Contributing to CSC 510 Project 1
+# Contributing to Constable
 Hi there! Thanks for taking the time to contribute to our github repo.
 
 The following is a set of guidelines for contributing to our repository which has an implementation of automated code and file review i.e look for the presence of files, correct references, review if releases exist, etc. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
 
 # Code of Conduct
-This project and everyone participating in it is governed by the [CSC 510 Project 1 Code of Conduct](CODE-OF-CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to ygangwa@ncsu.edu.
+This project and everyone participating in it is governed by our [Code of Conduct](./CODE-OF-CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to ygangwa@ncsu.edu.
 
 # How To Contribute
+
+## Tools
+
+### Editing
+
+Contributing to this repository requires that you use an editor that supports `.eslint` to support style. 
+
+### Testing
+
+Testing is important. We utilize `jest` for our unit tests and continually run tests via GitHub actions for pull requests and pushes directly to main. If you open a pull request, you will need to pass the CI tests in order to merge changes.
 
 ### The Kanban Board for Constable.
 
