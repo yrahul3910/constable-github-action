@@ -29,9 +29,7 @@
   "homepage": "https://github.com/dangoslen/constable-github-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.5",
-    "@actions/github": "^4.0.0",
-    "canvasjs": "^1.8.3",
-    "chart.js": "^2.9.3"
+    "@actions/github": "^4.0.0"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.24.0",

@@ -6,7 +6,6 @@ require('./sourcemap-register.js');module.exports =
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 const core = __webpack_require__(186);
-const CanvasJS = __webpack_require__(864);
 const wait = __webpack_require__(258);
 const readme_maxPoints = 2;
 const contributions_maxPoints = 1;
@@ -439,14 +438,6 @@ let wait = function (milliseconds) {
 };
 
 module.exports = wait;
-
-
-/***/ }),
-
-/***/ 864:
-/***/ ((module) => {
-
-module.exports = eval("require")("canvasjs");
 
 
 /***/ }),

@@ -1,5 +1,4 @@
 const core = require('@actions/core');
-const CanvasJS = require('canvasjs');
 const wait = require('./wait');
 const readme_maxPoints = 2;
 const contributions_maxPoints = 1;
