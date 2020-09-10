@@ -28,10 +28,10 @@ jobs:
       uses: thollander/actions-comment-pull-request@master
       with:
         message: "
-# ![](https://img.shields.io/badge/Constable-${{ pull-request-workflow.constable.outputs.explanation }}-blue)
+# ![](https://img.shields.io/badge/Constable-${{ pull-request-workflow.constable.outputs.grade }}-blue)
 <details>
   <summary>Click to see the report!</summary>
-  ${{ pull-request-workflow.constable.outputs.explanation }}
+  ${{ pull-request-workflow.constable.outputs.report }}
 </details>"
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
