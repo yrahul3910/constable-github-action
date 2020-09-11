@@ -12,7 +12,15 @@ This project and everyone participating in it is governed by our [Code of Conduc
 
 ### Editing
 
-Contributing to this repository requires that you use an editor that supports `.eslint` to support style. 
+Contributing to this repository requires that you use an editor that supports the following tools.
+
+#### [EsLint](https://eslint.org/)
+
+For javascript style. See the `.eslintrc.json` file
+
+#### [EditorConfig](https://EditorConfig.org) 
+
+For things like tabs, spaces, encodings, etc. See the `.editorconfig` file 
 
 ### Testing
 
