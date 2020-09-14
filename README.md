@@ -4,12 +4,7 @@
 
   <h2>Keeping repositories contributable.</h2>
 
-   <iframe width="560" height="315"
-    src="https://www.youtube.com/embed/NXANSl0S1xA" 
-    frameborder="0" 
-    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-    allowfullscreen>
-  </iframe>
+  [![Constable](http://img.youtube.com/vi/NXANSl0S1xA/0.jpg)](http://www.youtube.com/watch?v=NXANSl0S1xA "Constable")
   
 </div>
 ---
