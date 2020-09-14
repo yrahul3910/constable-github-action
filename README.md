@@ -1,12 +1,19 @@
-<p align="center">
+<div align="center">
 
   <h1>Constable</h1>
 
   <h2>Keeping repositories contributable.</h2>
 
   <a href="https://github.com/dangoslen/constable-github-action/actions"><img alt="constable-github-action-status" src="https://github.com/dangoslen/constable-github-action/workflows/units-test/badge.svg"></a>
-</p>
 
+   <iframe width="560" height="315"
+    src="https://www.youtube.com/embed/NXANSl0S1xA" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+  </iframe>
+  
+</div>
 ---
 
 Constable is a simple GitHub action to grade your repositories contributability. Simple add the action to any GitHub Actions workflow you like and start seeing how contributable your repository is. A sample workflow is provided below:
