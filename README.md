@@ -4,8 +4,6 @@
 
   <h2>Keeping repositories contributable.</h2>
 
-  <a href="https://github.com/dangoslen/constable-github-action/actions"><img alt="constable-github-action-status" src="https://github.com/dangoslen/constable-github-action/workflows/units-test/badge.svg"></a>
-
    <iframe width="560" height="315"
     src="https://www.youtube.com/embed/NXANSl0S1xA" 
     frameborder="0" 
