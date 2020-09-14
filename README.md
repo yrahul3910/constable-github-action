@@ -1,7 +1,6 @@
 <div align="center">
 
   <h1>Constable</h1>
-  <a href="https://youtu.be/NXANSl0S1xA">Advertisement Video</a>
 
   <h2>Keeping repositories contributable.</h2>
   <a href="https://github.com/dangoslen/constable-github-action/actions"><img alt="constable-github-action-status" src="https://github.com/dangoslen/constable-github-action/workflows/units-test/badge.svg"></a>
