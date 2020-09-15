@@ -24,6 +24,7 @@ jobs:
       uses: ./
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - run: echo ${{ steps.constable.outputs.grade }}
     - uses: thollander/actions-comment-pull-request@master
       with:
         message: "
