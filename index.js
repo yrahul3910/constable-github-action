@@ -103,5 +103,5 @@ core.info(`Score for this repo =  ` + score);
 core.setOutput('score', score)
 
 const grade = calculateGrade(score);
-core.info(`Grade for this repo =  ` + score);
+core.info(`Grade for this repo =  ` + grade);
 core.setOutput('grade', grade)
