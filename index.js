@@ -54,7 +54,7 @@ D+ : 65-69
 D  : 60-64
 Redo: 0-59
 */
-function grade(score) {
+function calculateGrade(score) {
   let grade = 'F'
   if(score >= 95){
     grade = 'A+'
@@ -84,7 +84,7 @@ function grade(score) {
 }
 
 // Check Files
-await run()
+run()
 
 // Check for issues
 // Must be passed in via the GITHUB_TOKEN
@@ -96,11 +96,12 @@ let repo = payload.repository
 let owner = payload.owner
 
 const issueScore = issueChecker.check(repo, owner, octoClient)
+total_score+=issueScore
 
 const score = (total_score/8)*100;
-
 core.log(`Score for this repo =  ` + score);
 core.setOutput('score', score)
 
-const grade = grade(score);
+const grade = calculateGrade(score);
+core.log(`Grade for this repo =  ` + score);
 core.setOutput('grade', grade)
