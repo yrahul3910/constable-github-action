@@ -5,6 +5,10 @@ const owner = "owner"
 const repo = "repo"
 const date = new Date("September 30, 2019")
 const thirtyDaysAgo = new Date("August 31, 2019")
+const expectedSearchString = `${owner}/${repo} is:closed is:issue closed:>${thirtyDaysAgo.toISOString()} closed:<${date.toISOString()}`
+const expectedVars = {
+  search: expectedSearchString
+}
 
 describe('the issue-checker', () => {
 
@@ -23,13 +27,6 @@ describe('the issue-checker', () => {
 
   it('should build the proper query and return a score of 1', () => {
     
-    const expectedVars = {
-        repo: repo,
-        owner: owner,
-        endDate: date.toDateString(),
-        startDate: thirtyDaysAgo.toDateString(),
-    }
-
     octoClient = github.getOctokit('token')
     jest.spyOn(octoClient, "graphql").mockImplementation((query, vars) => {
         expect(query).toBe(issueChecker.query)
@@ -46,13 +43,6 @@ describe('the issue-checker', () => {
 
   it('should build the proper query and return a score of 0', () => {
     
-    const expectedVars = {
-        repo: repo,
-        owner: owner,
-        endDate: date.toDateString(),
-        startDate: thirtyDaysAgo.toDateString(),
-    }
-
     octoClient = github.getOctokit('token')
     jest.spyOn(octoClient, "graphql").mockImplementation((query, vars) => {
         expect(query).toBe(issueChecker.query)

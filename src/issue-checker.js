@@ -1,6 +1,6 @@
 const query = `
-query issuesCheck($owner: String!, $repo: String!, $startDate: String!, $endDate: String!) {
-    search(last:100, query:"$owner/$repo is:closed is:issue closed:>$startDate closed:<$endDate", type:ISSUE) {
+query issuesCheck($search: String!) {
+    search(last:100, query:$search, type:ISSUE) {
       issueCount
       pageInfo {
         endCursor
@@ -23,14 +23,10 @@ const check = function (repo, owner, octoClient) {
   };
 
 const getIssueCount = function (repo, owner, startDate, endDate, octoClient) {
-  const variables = {
-    repo: repo,
-    owner: owner,
-    startDate: startDate.toDateString(),
-    endDate: endDate.toDateString()
-  }
-
-  const response = octoClient.graphql(query, variables);
+  const searchString = `${owner}/${repo} is:closed is:issue closed:>${startDate.toISOString()} closed:<${endDate.toISOString()}`
+  const response = octoClient.graphql(query, {
+   search: searchString
+  });
   return response.issueCount
 }
 
