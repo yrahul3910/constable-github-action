@@ -26,8 +26,8 @@ describe('the issue-checker', () => {
     const expectedVars = {
         repo: repo,
         owner: owner,
-        currentDate: date.toDateString(),
-        oldDate: thirtyDaysAgo.toDateString(),
+        endDate: date.toDateString(),
+        startDate: thirtyDaysAgo.toDateString(),
     }
 
     octoClient = github.getOctokit('token')
@@ -40,7 +40,7 @@ describe('the issue-checker', () => {
         }
     })
 
-    const issueCount = issueChecker.check(owner, repo, octoClient)
+    const issueCount = issueChecker.check(repo, owner, octoClient)
     expect(issueCount).toBe(8)
   })
 

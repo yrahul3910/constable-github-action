@@ -29,7 +29,7 @@
     "testEnvironment": "node",
     "coverageReporters": [
       "json-summary"
-    ]  
+    ]
   },
   "homepage": "https://github.com/dangoslen/constable-github-action#readme",
   "dependencies": {
