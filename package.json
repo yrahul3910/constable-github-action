@@ -7,6 +7,8 @@
     "lint": "eslint .",
     "package": "ncc build index.js -o dist --source-map",
     "test": "jest",
+    "test:coverage": "npm test -- --coverage",
+    "test:badge": "npm run test:coverage && make-coverage-badge --output-path ./assets/coverage-badge.svg",
     "all": "npm run lint && npm run package && npm run test"
   },
   "repository": {
@@ -24,7 +26,10 @@
     "url": "https://github.com/dangoslen/constable-github-action/issues"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "coverageReporters": [
+      "json-summary"
+    ]  
   },
   "homepage": "https://github.com/dangoslen/constable-github-action#readme",
   "dependencies": {
@@ -32,8 +37,9 @@
     "@actions/github": "^4.0.0"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.24.0",
-    "eslint": "^7.4.0",
-    "jest": "^26.1.0"
+    "@vercel/ncc": "^0.24.1",
+    "eslint": "^7.9.0",
+    "jest": "^26.1.0",
+    "make-coverage-badge": "^1.2.0"
   }
 }
