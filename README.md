@@ -35,6 +35,7 @@ jobs:
   <summary>Click to see the report!</summary>
   ${{ pull-request-workflow.constable.outputs.report }}
 </details>"
+      env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 

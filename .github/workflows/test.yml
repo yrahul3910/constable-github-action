@@ -20,4 +20,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: ./
+    - name: constable
+      uses: ./
+    - uses: thollander/actions-comment-pull-request@master
+      with:
+        message: "
+# ![](https://img.shields.io/badge/Constable-${{ test.constable.outputs.grade }}-blue)
+<details>
+  <summary>Click to see the report!</summary>
+  ${{ test.constable.outputs.report }}
+</details>"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

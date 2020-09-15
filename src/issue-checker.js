@@ -15,7 +15,11 @@ const check = function (repo, owner, octoClient) {
     let startDate = new Date(today.toDateString())
     startDate.setDate(startDate.getDate() - 30)
     
-    return getIssueCount(repo, owner, startDate, today, octoClient)
+    const issues = getIssueCount(repo, owner, startDate, today, octoClient)
+    if (issues >= 1) {
+      return 1
+    }
+    return 0
   };
 
 const getIssueCount = function (repo, owner, startDate, endDate, octoClient) {
