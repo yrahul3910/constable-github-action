@@ -104,4 +104,3 @@ core.setOutput('score', score)
 
 const grade = grade(score);
 core.setOutput('grade', grade)
-

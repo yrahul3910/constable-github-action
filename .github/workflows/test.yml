@@ -25,10 +25,10 @@ jobs:
     - uses: thollander/actions-comment-pull-request@master
       with:
         message: "
-# ![](https://img.shields.io/badge/Constable-${{ test.constable.outputs.grade }}-blue)
+# ![](https://img.shields.io/badge/Constable-${{ steps.constable.outputs.grade }}-blue)
 <details>
   <summary>Click to see the report!</summary>
-  ${{ test.constable.outputs.report }}
+  ${{ steps.constable.outputs.report }}
 </details>"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
