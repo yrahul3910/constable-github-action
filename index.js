@@ -99,9 +99,9 @@ const issueScore = issueChecker.check(repo, owner, octoClient)
 total_score+=issueScore
 
 const score = (total_score/8)*100;
-core.log(`Score for this repo =  ` + score);
+core.info(`Score for this repo =  ` + score);
 core.setOutput('score', score)
 
 const grade = calculateGrade(score);
-core.log(`Grade for this repo =  ` + score);
+core.info(`Grade for this repo =  ` + score);
 core.setOutput('grade', grade)
