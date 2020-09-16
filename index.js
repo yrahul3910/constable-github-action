@@ -86,3 +86,15 @@ if(score >=60 && score <= 64){
 if(score <= 59){
   console.log("Grade: Redo");
 }
+
+var table = require('markdown-table')
+  
+var t= table([
+  ['Item', 'Weight', 'Score'],
+  ['README.md','2', filename_score],
+  ['CONTRIBUTING.md','1', filename_score]
+  ['CODE-OF-CONDUCT.md','1', filename_score]
+  ['LICENSE.md','1', filename_score]
+  ['CITATION.md','1', filename_score]
+]);
+console.log(t)
