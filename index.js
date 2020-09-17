@@ -1,11 +1,11 @@
 const core = require('@actions/core');
 const wait = require('./wait');
-const readme_maxPoints = 2;
-const contributions_maxPoints = 1;
-const conduct_maxPoints = 1;
-const license_maxPoints = 1;
-const gitignore_maxPoints = 1;
-const citations_maxPoints = 1;
+var readme_present = 0;
+var contributions_present = 0;
+var conduct_present = 0;
+var license_present = 0;
+var gitignore_present = 0;
+var citations_present = 0;
 
 
 var total_score = 0;
@@ -20,18 +20,27 @@ const fs = require('fs');
       fs.readdirSync(testFolder).forEach(file => {
         
         if(file == 'README.md'){
-          total_score = total_score+2;
+          readme_present = 1;
+          total_score = total_score+1;
         }
         if(file == 'CONTRIBUTING.md'){
+          contributions_present = 1;
           total_score = total_score+1;
         }
         if(file == 'CODE-OF-CONDUCT.md'){
+          conduct_present = 1;
           total_score = total_score+1;
         }
         if(file == 'LICENSE'){
+          license_present = 1;
           total_score = total_score+1;
         }
         if(file == 'CITATION.md'){
+          citations_present = 1;
+          total_score = total_score+1;
+        }
+        if(file == '.gitignore'){
+          gitignore_present = 1;
           total_score = total_score+1;
         }
       });
