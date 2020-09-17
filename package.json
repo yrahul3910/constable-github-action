@@ -43,6 +43,6 @@
     "make-coverage-badge": "^1.2.0"
   },
   "dependencies": {
-    "module": "npm install markdown-table"
+    "module": "markdown-table"
 } 
 }
