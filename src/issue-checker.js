@@ -30,7 +30,8 @@ const getIssueCount = function (repository, startDate, endDate, octoClient) {
   const response = octoClient.graphql(query, {
    search: searchString
   });
-  return response.issueCount
+  core.info(response)
+  return response.search.issueCount
 }
 
 const currentDate = function () {

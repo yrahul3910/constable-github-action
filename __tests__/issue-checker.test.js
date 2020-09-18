@@ -32,7 +32,7 @@ describe('the issue-checker', () => {
         expect(vars).toStrictEqual(expectedVars)
 
         return {
-            issueCount: 8
+            search: { issueCount: 8 }
         }
     })
 
@@ -48,7 +48,7 @@ describe('the issue-checker', () => {
         expect(vars).toStrictEqual(expectedVars)
 
         return {
-            issueCount: 0
+          search: { issueCount: 0 }
         }
     })
 
