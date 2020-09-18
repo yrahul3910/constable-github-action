@@ -34,7 +34,7 @@ const fs = __webpack_require__(747);
           contributions_present = 1;
           total_score = total_score+1;
         }
-        if(file == 'CODE-OF-CONDUCT.md'){
+        if(file == 'CODE_OF_CONDUCT.md'){
           conduct_present = 1;
           total_score = total_score+1;
         }
