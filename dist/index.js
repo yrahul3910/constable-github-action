@@ -26,7 +26,7 @@ const repo = github.context.repo
 
 function fileCheck() {
   try {
-    fs.readdirSync(testFolder).forEach(file => {
+    fs.readdirSync('.').forEach(file => {
       if(file == 'README.md') {
         readme_present = 1;
         total_score = total_score+1;
