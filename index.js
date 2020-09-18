@@ -100,8 +100,13 @@ const octoClient = github.getOctokit(token)
 const repo = github.context.repo
 
 const repository = `${repo.owner}/${repo.repo}`
-const issue_score = issueChecker.check(repository, octoClient)
-total_score+=issue_score
+let issue_score = 0
+async function issueCheck() {
+  issue_score = await issueChecker.check(repository, octoClient)
+  total_score+=issue_score
+}
+
+issueCheck()
 
 const score = (total_score/8)*100;
 core.info(`Score for this repo =  ` + score);

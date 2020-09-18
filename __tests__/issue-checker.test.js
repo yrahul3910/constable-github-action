@@ -24,35 +24,35 @@ describe('the issue-checker', () => {
     })
   })
 
-  it('should build the proper query and return a score of 1', () => {
+  it('should build the proper query and return a score of 1', async () => {
     
     octoClient = github.getOctokit('token')
     jest.spyOn(octoClient, "graphql").mockImplementation((query, vars) => {
         expect(query).toBe(issueChecker.query)
         expect(vars).toStrictEqual(expectedVars)
 
-        return {
-            search: { issueCount: 8 }
-        }
+        return new Promise(resolve => {
+          resolve({ search: { issueCount: 8 } })
+        })
     })
 
-    const score = issueChecker.check(repository, octoClient)
+    const score = await issueChecker.check(repository, octoClient)
     expect(score).toBe(1)
   })
 
-  it('should build the proper query and return a score of 0', () => {
+  it('should build the proper query and return a score of 0', async () => {
     
     octoClient = github.getOctokit('token')
     jest.spyOn(octoClient, "graphql").mockImplementation((query, vars) => {
         expect(query).toBe(issueChecker.query)
         expect(vars).toStrictEqual(expectedVars)
 
-        return {
-          search: { issueCount: 0 }
-        }
+        return new Promise(resolve => {
+          resolve({ search: { issueCount: 0 } })
+        })
     })
 
-    const score = issueChecker.check(repository, octoClient)
+    const score = await issueChecker.check(repository, octoClient)
     expect(score).toBe(0)
   })
 

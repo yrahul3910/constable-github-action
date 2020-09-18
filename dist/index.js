@@ -107,8 +107,13 @@ const octoClient = github.getOctokit(token)
 const repo = github.context.repo
 
 const repository = `${repo.owner}/${repo.repo}`
-const issue_score = issueChecker.check(repository, octoClient)
-total_score+=issue_score
+let issue_score = 0
+async function issueCheck() {
+  issue_score = await issueChecker.check(repository, octoClient)
+  total_score+=issue_score
+}
+
+issueCheck()
 
 const score = (total_score/8)*100;
 core.info(`Score for this repo =  ` + score);
@@ -6233,22 +6238,22 @@ query issuesCheck($search: String!) {
   }   
 `
 
-const check = function (repository, octoClient) {
+const check = async function (repository, octoClient) {
     const today = this.currentDate()
     let startDate = new Date(today.toDateString())
     startDate.setDate(startDate.getDate() - 30)
     
-    const issues = getIssueCount(repository, startDate, today, octoClient)
+    const issues = await getIssueCount(repository, startDate, today, octoClient)
     if (issues >= 1) {
       return 1
     }
     return 0
   };
 
-const getIssueCount = function (repository, startDate, endDate, octoClient) {
+const getIssueCount = async function (repository, startDate, endDate, octoClient) {
   const searchString = `repo:${repository} is:issue is:closed closed:>${startDate.toISOString()} closed:<${endDate.toISOString()}`
   core.info(`Issue search is ${searchString}`)
-  const response = octoClient.graphql(query, {
+  const response = await octoClient.graphql(query, {
    search: searchString
   });
   core.info(response)
