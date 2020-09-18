@@ -28,7 +28,7 @@ function fileCheck() {
         contributions_present = 1;
         total_score = total_score+1;
       }
-      if(file == 'CODE-OF-CONDUCT.md') {
+      if(file == 'CODE_OF_CONDUCT.md') {
         conduct_present = 1;
         total_score = total_score+1;
       }
@@ -115,7 +115,7 @@ async function run() {
     ['Item', 'Weight', 'Score'],
     ['README.md','1', readme_present],
     ['CONTRIBUTING.md','1', contributions_present],
-    ['CODE-OF-CONDUCT.md','1', conduct_present],
+    ['CODE_OF_CONDUCT.md','1', conduct_present],
     ['LICENSE.md','1', license_present],
     ['CITATION.md','1', citations_present],
     ['.gitignore','1', gitignore_present],
