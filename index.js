@@ -105,6 +105,5 @@ var t= table([
   ['LICENSE.md','1', license_present],
   ['CITATION.md','1', citations_present],
   ['.gitignore','1', gitignore_present]
-  
-]);
+])
 console.log(t)
