@@ -6246,7 +6246,7 @@ const check = function (repository, octoClient) {
   };
 
 const getIssueCount = function (repository, startDate, endDate, octoClient) {
-  const searchString = `${repository} is:closed is:issue closed:>${startDate.toISOString()} closed:<${endDate.toISOString()}`
+  const searchString = `repo:${repository} is:issue is:closed closed:>${startDate.toISOString()} closed:<${endDate.toISOString()}`
   core.info(`Issue search is ${searchString}`)
   const response = octoClient.graphql(query, {
    search: searchString

@@ -4,7 +4,7 @@ const issueChecker = require('../src/issue-checker')
 const repository = 'owner/repo'
 const date = new Date("September 30, 2019")
 const thirtyDaysAgo = new Date("August 31, 2019")
-const expectedSearchString = `${repository} is:closed is:issue closed:>${thirtyDaysAgo.toISOString()} closed:<${date.toISOString()}`
+const expectedSearchString = `repo:${repository} is:issue is:closed closed:>${thirtyDaysAgo.toISOString()} closed:<${date.toISOString()}`
 const expectedVars = {
   search: expectedSearchString
 }
