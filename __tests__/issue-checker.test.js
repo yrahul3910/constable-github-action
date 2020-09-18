@@ -1,11 +1,10 @@
 const github = require("@actions/github")
 const issueChecker = require('../src/issue-checker')
 
-const owner = "owner"
-const repo = "repo"
+const repository = 'owner/repo'
 const date = new Date("September 30, 2019")
 const thirtyDaysAgo = new Date("August 31, 2019")
-const expectedSearchString = `${owner}/${repo} is:closed is:issue closed:>${thirtyDaysAgo.toISOString()} closed:<${date.toISOString()}`
+const expectedSearchString = `${repository} is:closed is:issue closed:>${thirtyDaysAgo.toISOString()} closed:<${date.toISOString()}`
 const expectedVars = {
   search: expectedSearchString
 }
@@ -37,7 +36,7 @@ describe('the issue-checker', () => {
         }
     })
 
-    const score = issueChecker.check(repo, owner, octoClient)
+    const score = issueChecker.check(repository, octoClient)
     expect(score).toBe(1)
   })
 
@@ -53,7 +52,7 @@ describe('the issue-checker', () => {
         }
     })
 
-    const score = issueChecker.check(repo, owner, octoClient)
+    const score = issueChecker.check(repository, octoClient)
     expect(score).toBe(0)
   })
 

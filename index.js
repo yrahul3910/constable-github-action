@@ -97,12 +97,10 @@ run()
 // Must be passed in via the GITHUB_TOKEN
 const token = process.env.GITHUB_TOKEN
 const octoClient = github.getOctokit(token)
-const payload = github.context.payload
+const repo = github.context.payload.repo()
 
-let repo = payload.repository
-let owner = payload.owner
-
-const issue_score = issueChecker.check(repo, owner, octoClient)
+const repository = `${repo.owner}/${repo.repo}`
+const issue_score = issueChecker.check(repo, octoClient)
 total_score+=issue_score
 
 const score = (total_score/8)*100;
