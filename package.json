@@ -29,12 +29,14 @@
     "testEnvironment": "node",
     "coverageReporters": [
       "json-summary"
-    ]  
+    ]
   },
   "homepage": "https://github.com/dangoslen/constable-github-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.5",
-    "@actions/github": "^4.0.0"
+    "@actions/github": "^4.0.0",
+    "markdown-table": "^2.0.0",
+    "package": "^1.0.1"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.24.1",
