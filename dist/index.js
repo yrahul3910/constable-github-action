@@ -127,7 +127,7 @@ var report = table([
   ['CITATION.md','1', citations_present],
   ['.gitignore','1', gitignore_present],
   ['issues closed (last 30 days)', '1', issue_score],
-  ['**Total Score**', `**${total_score}**`, `**${score}`]
+  ['**Total Score**', `**${total_score}**`, `**${score}**`]
 ]);
 console.log(report)
 core.setOutput('report', report)
