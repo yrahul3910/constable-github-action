@@ -1,3 +1,5 @@
+const core = require('@actions/core');
+
 const query = `
 query issuesCheck($search: String!) {
     search(last:100, query:$search, type:ISSUE) {
@@ -24,6 +26,7 @@ const check = function (repo, owner, octoClient) {
 
 const getIssueCount = function (repo, owner, startDate, endDate, octoClient) {
   const searchString = `${owner}/${repo} is:closed is:issue closed:>${startDate.toISOString()} closed:<${endDate.toISOString()}`
+  core.info(`Issue search is ${searchString}`)
   const response = octoClient.graphql(query, {
    search: searchString
   });

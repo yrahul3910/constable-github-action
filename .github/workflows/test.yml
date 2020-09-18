@@ -29,5 +29,6 @@ jobs:
         message: "
 ### Constable has finished grading this repository!
 ![](https://img.shields.io/badge/Constable-${{ steps.constable.outputs.grade }}-blue)
+
 ${{ steps.constable.outputs.report }}"
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
