@@ -20,7 +20,6 @@ const testFolder = '.';
 const fs = __webpack_require__(747);
 
 
-
   //most @actions toolkit packages have async methods
   async function run() {
     try {
@@ -102,7 +101,6 @@ if(score >=60 && score <= 64){
 if(score <= 59){
   console.log("Grade: Redo");
 }
-
 var table = __webpack_require__(62)
   
 var t= table([
@@ -113,8 +111,7 @@ var t= table([
   ['LICENSE.md','1', license_present],
   ['CITATION.md','1', citations_present],
   ['.gitignore','1', gitignore_present]
-  
-]);
+])
 console.log(t)
 
 

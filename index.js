@@ -13,7 +13,6 @@ const testFolder = '.';
 const fs = require('fs');
 
 
-
   //most @actions toolkit packages have async methods
   async function run() {
     try {
@@ -27,7 +26,7 @@ const fs = require('fs');
           contributions_present = 1;
           total_score = total_score+1;
         }
-        if(file == 'CODE-OF-CONDUCT.md'){
+        if(file == 'CODE_OF_CONDUCT.md'){
           conduct_present = 1;
           total_score = total_score+1;
         }
