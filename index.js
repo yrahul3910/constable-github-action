@@ -119,9 +119,9 @@ var report = table([
   ['CONTRIBUTING.md','1', contributions_present],
   ['CODE-OF-CONDUCT.md','1', conduct_present],
   ['LICENSE.md','1', license_present],
-  ['CITATION.md','1', citations_present]
-  ['.gitignore','1', gitignore_present]
-  ['issues closed (last 30 days)', '1', issue_score]
+  ['CITATION.md','1', citations_present],
+  ['.gitignore','1', gitignore_present],
+  ['issues closed (last 30 days)', '1', issue_score],
   ['**Total Score**', `**${total_score}**`, score]
 ]);
 console.log(report)
