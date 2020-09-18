@@ -104,7 +104,7 @@ run()
 // Must be passed in via the GITHUB_TOKEN
 const token = process.env.GITHUB_TOKEN
 const octoClient = github.getOctokit(token)
-const repo = github.context.repo()
+const repo = github.context.repo
 
 const repository = `${repo.owner}/${repo.repo}`
 const issue_score = issueChecker.check(repo, octoClient)
