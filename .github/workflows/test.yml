@@ -20,4 +20,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: ./
+    - id: constable
+      uses: ./
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - uses: thollander/actions-comment-pull-request@master
+      with:
+        message: "
+### Constable has finished grading this repository!
+![](https://img.shields.io/badge/Constable-${{ steps.constable.outputs.grade }}-blue)
+
+${{ steps.constable.outputs.report }}"
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
