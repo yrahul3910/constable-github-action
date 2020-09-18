@@ -115,14 +115,14 @@ core.setOutput('grade', grade)
   
 var report = table([
   ['Item', 'Weight', 'Score'],
-  ['README.md','2', readme_present],
+  ['README.md','1', readme_present],
   ['CONTRIBUTING.md','1', contributions_present],
   ['CODE-OF-CONDUCT.md','1', conduct_present],
   ['LICENSE.md','1', license_present],
   ['CITATION.md','1', citations_present],
   ['.gitignore','1', gitignore_present],
   ['issues closed (last 30 days)', '1', issue_score],
-  ['**Total Score**', `**${total_score}**`, score]
+  ['**Total Score**', `**${total_score}**`, `**${score}`]
 ]);
 console.log(report)
 core.setOutput('report', report)
