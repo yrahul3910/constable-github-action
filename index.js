@@ -95,7 +95,6 @@ if(score >=60 && score <= 64){
 if(score <= 59){
   console.log("Grade: Redo");
 }
-
 var table = require('markdown-table')
   
 var t= table([
