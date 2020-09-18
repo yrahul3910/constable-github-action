@@ -13,7 +13,6 @@ const testFolder = '.';
 const fs = require('fs');
 
 
-
   //most @actions toolkit packages have async methods
   async function run() {
     try {
