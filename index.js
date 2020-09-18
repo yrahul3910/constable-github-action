@@ -1,15 +1,15 @@
 const core = require('@actions/core');
 const github = require('@actions/github')
 const fs = require('fs');
-
+const table = require('markdown-table')
 const issueChecker = require('./src/issue-checker')
 
-const readme_maxPoints = 2;
-const contributions_maxPoints = 1;
-const conduct_maxPoints = 1;
-const license_maxPoints = 1;
-const gitignore_maxPoints = 1;
-const citations_maxPoints = 1;
+var readme_present = 0;
+var contributions_present = 0;
+var conduct_present = 0;
+var license_present = 0;
+var gitignore_present = 0;
+var citations_present = 0;
 
 
 var total_score = 0;
@@ -19,24 +19,31 @@ const testFolder = '.';
 async function run() {
   try {
     fs.readdirSync(testFolder).forEach(file => {
-      
-      if(file == 'README.md'){
-        total_score = total_score+2;
-      }
-      if(file == 'CONTRIBUTING.md'){
+      if(file == 'README.md') {
+        readme_present = 1;
         total_score = total_score+1;
       }
-      if(file == 'CODE-OF-CONDUCT.md'){
+      if(file == 'CONTRIBUTING.md') {
+        contributions_present = 1;
         total_score = total_score+1;
       }
-      if(file == 'LICENSE'){
+      if(file == 'CODE-OF-CONDUCT.md') {
+        conduct_present = 1;
         total_score = total_score+1;
       }
-      if(file == 'CITATION.md'){
+      if(file == 'LICENSE') {
+        license_present = 1;
+        total_score = total_score+1;
+      }
+      if(file == 'CITATION.md') {
+        citations_present = 1;
+        total_score = total_score+1;
+      }
+      if(file == '.gitignore') {
+        gitignore_present = 1;
         total_score = total_score+1;
       }
     });
-    
   } catch (error) {
     core.setFailed(error.message);
   }
@@ -56,28 +63,28 @@ Redo: 0-59
 */
 function calculateGrade(score) {
   let grade = 'F'
-  if(score >= 95){
+  if(score >= 95) {
     grade = 'A+'
   }
-  if(score >= 90 && score <= 94){
+  if(score >= 90 && score <= 94) {
     grade = 'A'
   }
-  if(score >=85 && score <= 89){
+  if(score >=85 && score <= 89) {
     grade = 'B+'
   }
-  if(score >=80 && score <= 84){
+  if(score >=80 && score <= 84) {
     grade = 'B'
   }
-  if(score >=75 && score <= 79){
+  if(score >=75 && score <= 79) {
     grade = 'C+'
   }
-  if(score >=70 && score <= 74){
+  if(score >=70 && score <= 74) {
     grade = 'C'
   }
-  if(score >=65 && score <= 69){
+  if(score >=65 && score <= 69) {
     grade = 'D+'
   }
-  if(score >=60 && score <= 64){
+  if(score >=60 && score <= 64) {
     grade = 'D'
   }
   return grade
@@ -95,8 +102,8 @@ const payload = github.context.payload
 let repo = payload.repository
 let owner = payload.owner
 
-const issueScore = issueChecker.check(repo, owner, octoClient)
-total_score+=issueScore
+const issue_score = issueChecker.check(repo, owner, octoClient)
+total_score+=issue_score
 
 const score = (total_score/8)*100;
 core.info(`Score for this repo =  ` + score);
@@ -105,3 +112,17 @@ core.setOutput('score', score)
 const grade = calculateGrade(score);
 core.info(`Grade for this repo =  ` + grade);
 core.setOutput('grade', grade)
+  
+var report = table([
+  ['Item', 'Weight', 'Score'],
+  ['README.md','2', readme_present],
+  ['CONTRIBUTING.md','1', contributions_present],
+  ['CODE-OF-CONDUCT.md','1', conduct_present],
+  ['LICENSE.md','1', license_present],
+  ['CITATION.md','1', citations_present]
+  ['.gitignore','1', gitignore_present]
+  ['issues closed (last 30 days)', '1', issue_score]
+  ['**Total Score**', `**${total_score}**`, score]
+]);
+console.log(report)
+core.setOutput('report', report)
