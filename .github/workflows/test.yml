@@ -25,6 +25,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - uses: thollander/actions-comment-pull-request@master
+      if: ${{ github.event_name== 'pull_request' }} 
       with:
         message: "
 ### Constable has finished grading this repository!
