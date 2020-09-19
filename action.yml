@@ -1,5 +1,5 @@
 name: 'Constable - Contributability Grader'
-description: 'An action that grades your repository's contributability'
+description: "An action that grades your repository's contributability"
 outputs:
   score:
     description: 'The repository is assigned a score based on the evaluation criterias'
