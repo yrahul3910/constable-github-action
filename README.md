@@ -9,6 +9,7 @@
   [![Constable](http://img.youtube.com/vi/NXANSl0S1xA/0.jpg)](http://www.youtube.com/watch?v=NXANSl0S1xA "Constable")
   
 </div>
+
 ---
 
 Constable is a simple GitHub action to grade your repositories contributability. Simple add the action to any GitHub Actions workflow you like and start seeing how contributable your repository is. A sample workflow is provided below:
