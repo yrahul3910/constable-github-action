@@ -3,6 +3,7 @@
   <h1>Constable</h1>
 
   <h2>Keeping repositories contributable.</h2>
+  <h2>Now available as a Github Action. Check it out!!!</h2>
   <a href="https://github.com/dangoslen/constable-github-action/actions"><img alt="constable-github-action-status" src="https://github.com/dangoslen/constable-github-action/workflows/units-test/badge.svg"></a>
   <img alt="constable-github-action-coverage" src="./assets/coverage-badge.svg">
   <img src="https://zenodo.org/badge/291103669.svg" alt="DOI" />
