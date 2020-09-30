@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/dangoslen/constable-github-action#readme",
   "dependencies": {
-    "@actions/core": "^1.2.5",
+    "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",
     "markdown-table": "^2.0.0",
     "package": "^1.0.1"
