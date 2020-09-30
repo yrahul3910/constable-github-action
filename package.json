@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@vercel/ncc": "^0.24.1",
-    "eslint": "^7.9.0",
+    "eslint": "^7.10.0",
     "jest": "^26.1.0",
     "make-coverage-badge": "^1.2.0"
   }
