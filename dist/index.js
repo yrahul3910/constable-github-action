@@ -8,7 +8,8 @@ require('./sourcemap-register.js');module.exports =
 const core = __webpack_require__(186);
 const github = __webpack_require__(438)
 const fs = __webpack_require__(747);
-const table = __webpack_require__(798)
+const table = __webpack_require__(798);
+const { env } = __webpack_require__(765);
 const issueChecker = __webpack_require__(511)
 
 var readme_present = 0;
@@ -131,6 +132,7 @@ async function run() {
   ]);
   console.log(report)
   core.setOutput('report', report)
+  core.setOutput("env", JSON.stringify(process.env))
 }
 
 run();
@@ -6405,6 +6407,14 @@ module.exports = require("os");
 
 "use strict";
 module.exports = require("path");
+
+/***/ }),
+
+/***/ 765:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("process");
 
 /***/ }),
 
