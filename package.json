@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dangoslen/constable-github-action.git"
+    "url": "git+https://github.com/MeghanaVasist/constable-github-action.git"
   },
   "keywords": [
     "GitHub",
@@ -23,7 +23,7 @@
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dangoslen/constable-github-action/issues"
+    "url": "https://github.com/MeghanaVasist/constable-github-action/issues"
   },
   "jest": {
     "testEnvironment": "node",
@@ -31,7 +31,7 @@
       "json-summary"
     ]
   },
-  "homepage": "https://github.com/dangoslen/constable-github-action#readme",
+  "homepage": "https://github.com/MeghanaVasist/constable-github-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",
