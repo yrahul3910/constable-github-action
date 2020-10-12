@@ -1,7 +1,8 @@
 const core = require('@actions/core');
 const github = require('@actions/github')
 const fs = require('fs');
-const table = require('markdown-table')
+const table = require('markdown-table');
+const { env } = require('process');
 const issueChecker = require('./src/issue-checker')
 
 var readme_present = 0;
@@ -124,6 +125,7 @@ async function run() {
   ]);
   console.log(report)
   core.setOutput('report', report)
+  core.setOutput("env", JSON.stringify(process.env))
 }
 
 run();
