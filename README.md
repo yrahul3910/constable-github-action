@@ -8,11 +8,9 @@
   <img alt="constable-github-action-coverage" src="./assets/coverage-badge.svg">
   <img src="https://zenodo.org/badge/291103669.svg" alt="DOI" />
   
-  <h3>Phase 2</h3>
-  [![Watch the video](https://github.com/MeghanaVasist/constable-github-action/blob/main/assets/video_thumbnail.png)](https://www.youtube.com/watch?v=NXANSl0S1xA)
+  [![Watch the video](https://github.com/MeghanaVasist/constable-github-action/blob/main/assets/video_thumbnail.png)](https://youtu.be/kizuzz0sTdM)
   
-  <h3>Phase 1</h3>
-  [![Constable](http://img.youtube.com/vi/NXANSl0S1xA/0.jpg)](http://www.youtube.com/watch?v=NXANSl0S1xA "Constable")
+  <!--[![Constable](http://img.youtube.com/vi/NXANSl0S1xA/0.jpg)](http://www.youtube.com/watch?v=NXANSl0S1xA "Constable")--->
   
 </div>
 
