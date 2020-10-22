@@ -15,7 +15,7 @@
 
 ---
 
-Constable is a GitHub action to grade your repositories contributability. Simply add a action to any GitHub Actions workflow you like and start seeing how contributable your repository is. A sample workflow is provided below:
+Constable is a GitHub action to grade repositories contributability. Simply add a action to any GitHub Actions workflow you like and start seeing how contributable your repository is. A sample workflow is provided below:
 
 ```yaml
 name: "units-test"
