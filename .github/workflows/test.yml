@@ -11,8 +11,8 @@ jobs:
   badge_job:
     runs-on: ubuntu-latest
     steps:
-      - id: constable
-        run: echo "Generating badge"
+      - id: consta
+        run: echo "##[set-output name=grade;]$(consta)"
       - name: Constable badge
         uses: RubbaBoy/BYOB@v1.1.0
         with:
