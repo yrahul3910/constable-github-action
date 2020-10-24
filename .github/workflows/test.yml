@@ -29,7 +29,6 @@ jobs:
       with:
         message: "
 ### Constable has finished grading this repository!
-![](https://byob.yarr.is/MeghanaVasist/constable-github-action/constable-badge/shields/shields.io)
 ![](https://img.shields.io/badge/Constable-${{ steps.constable.outputs.grade }}-blue)
 
 ${{ steps.constable.outputs.report }}"
