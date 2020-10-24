@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: constable
-        run: echo "##[set-output name=data;]$(constable)"
+        # run: echo "##[set-output name=grade;]$(constable)"
       - name: Constable badge
         uses: RubbaBoy/BYOB@v1.1.0
         with:
