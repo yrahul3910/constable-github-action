@@ -30,8 +30,6 @@ const getRepoDetails = async function() {
   })
   console.log(response)
 
-}
-
   const result = await request('GET /repos/{owner}/{repo}/contents', {
     owner: 'dangoslen',
     repo: 'constable-github-action'
