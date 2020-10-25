@@ -32,4 +32,28 @@ const getRepoDetails = async function() {
 
 }
 
+  const result = await request('GET /repos/{owner}/{repo}/contents', {
+    owner: 'dangoslen',
+    repo: 'constable-github-action'
+  })
+  
+  const files = new Set();
+  for (let i = 0; i < result.data.length; i++) {
+    files.add(result.data[i].name)
+  }
+  const dic = new Map()
+  const reqFiles = new Set(['README.md', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md', 'LICENSE', 'CITATION.md', '.gitignore'])
+  reqFiles.forEach(file => {
+    if (files.has(file)) {
+      dic[file] = 1
+    }
+    else {
+      dic[file] = 0
+    }
+
+  });
+  console.log(dic)
+}
+
+
 export default App;
