@@ -60,6 +60,7 @@ const getRepositoryDetails = async (owner, repository) => {
     owner: owner,
     repo: repository
   })
+  const commitActivityData = commit_activity.data;
 
   const pull_req = await request('GET /repos/:owner/:repo/pulls', {
     owner: owner,
@@ -130,18 +131,20 @@ const getRepositoryDetails = async (owner, repository) => {
     gradeDataList.push(gradeData[key])
   })
 
+  const gradedScore = calculateGrade(score * 10);
+
   console.log("Forks", repo_data.data["forks"])
   console.log("Stars", repo_data.data["stargazers_count"])
   console.log("Has Wiki", repo_data.data["has_wiki"])
   console.log("Has Project", repo_data.data["has_projects"])
   console.log("Additions and Deletions", add_del.data)
   console.log("Contributors", contributors.data)
-  console.log("Commit Activity", commit_activity.data)
+  console.log("Commit Activity", commitActivityData)
   console.log("Table", gradeDataList)
   console.log("Assigned grade is ", calculateGrade(score * 10))
-
+  
   return {
-    gradeDataList, cardData: {
+    gradeDataList, gradedScore, commitActivityData, cardData: {
       starCount: repo_data.data["stargazers_count"],
       forkCount: repo_data.data["forks"],
       contributorCount: contributors.data.length,

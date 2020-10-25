@@ -17,6 +17,9 @@ function App() {
   const [gradeDataList, setGradeDataList] = useState([]);
   const [isRepositorySet, setIsRepositorySet] = useState(false);
   const [cardData, setCardData] = useState({});
+  const [gradedScore, setGradedScore] = useState('');
+  const [commitActivityData, setCommitActivityData] = useState([]);
+  const [ isRepoDetailsLoaded, setIsRepoDetailsLoaded] = useState(false);
 
   const handleChange = (e) => {
     updateFormData({
@@ -31,10 +34,13 @@ function App() {
     setLoading(true);
     event.preventDefault();
     try {
-      const { gradeDataList, cardData } = await getRepositoryDetails(formData.ownerName, formData.repositoryName);
+      const { gradeDataList, gradedScore, commitActivityData, cardData } = await getRepositoryDetails(formData.ownerName, formData.repositoryName);
       setGradeDataList(gradeDataList);
       setCardData(cardData);
       setLoading(false);
+      setGradedScore(gradedScore);
+      setCommitActivityData(commitActivityData);
+      setIsRepoDetailsLoaded(true);
     } catch (err) {
       console.log(err);
       setLoading(false);
@@ -83,7 +89,7 @@ function App() {
             </div>
           </form>
         </div>
-        {isRepositorySet ? loading ? <Loading width="60px" height="60px" /> : <div className="row px-3">
+        {isRepositorySet ? loading ? <Loading width="60px" height="60px" /> : isRepoDetailsLoaded ? <div className="row px-3">
           <div className="col-4">
             <div className="row mb-2">
               <div className="card border-0 stars-card col-6">
@@ -161,19 +167,24 @@ function App() {
                   <tbody>
                     {gradeDataList.map((file, index) => (
                       <tr key={index}>
-                        <td>{index + 1}</td>
+                        <th scope="row">{index + 1}</th>
                         <td>{file['name']}</td>
                         <td>{file['weight']}</td>
                         <td>{file['score']}</td>
                       </tr>
                     ))}
+                    <tr>
+                      <th scope="row">9</th>
+                      <th colSpan="2">Final Grade</th>
+                      <td><span className="badge badge-pill badge-success">{gradedScore}</span></td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
-          <CommitHistory />
-        </div> : null}
+          <CommitHistory commitActivityData={commitActivityData}/>
+        </div> :null : null}
       </div>
     </div>
   );
