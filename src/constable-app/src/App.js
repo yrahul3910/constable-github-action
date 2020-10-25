@@ -22,71 +22,152 @@ function App() {
   );
 }
 
+function calculateGrade(score) {
+  let grade = 'F'
+  if(score >= 95) {
+    grade = 'A+'
+  }
+  if(score >= 90 && score <= 94) {
+    grade = 'A'
+  }
+  if(score >=85 && score <= 89) {
+    grade = 'B+'
+  }
+  if(score >=80 && score <= 84) {
+    grade = 'B'
+  }
+  if(score >=75 && score <= 79) {
+    grade = 'C+'
+  }
+  if(score >=70 && score <= 74) {
+    grade = 'C'
+  }
+  if(score >=65 && score <= 69) {
+    grade = 'D+'
+  }
+  if(score >=60 && score <= 64) {
+    grade = 'D'
+  }
+  return grade
+}
 
+function time(timestamp1, timestamp2) {
+  var difference = Date.parse(timestamp1) - Date.parse(timestamp2);
+  var daysDifference = Math.floor(difference/1000/60/60/24);
+  return daysDifference;
+}
 const getInsights = async function() {
+  const owner = "MeghanaVasist"
+  const repo = "constable-github-action"
+
   const repo_data = await request('GET /repos/{owner}/{repo}', {
-    owner: 'varsha5595',
-    repo: 'constable-github-action'
+    owner: owner,
+    repo: repo
   })
+
   const add_del = await request('GET /repos/:owner/:repo/stats/code_frequency', {
-    owner: 'varsha5595',
-    repo: 'constable-github-action'
+    owner: owner,
+    repo: repo
   })
-  const total_commits = await request('GET /repos/:owner/:repo/stats/participation', {
-    owner: 'varsha5595',
-    repo: 'constable-github-action'
-  })
+
   const contributors = await request('GET /repos/:owner/:repo/stats/contributors', {
-    owner: 'varsha5595',
-    repo: 'constable-github-action'
+    owner: owner,
+    repo: repo
   })
+
   const commit_activity = await request('GET /repos/:owner/:repo/stats/commit_activity', {
-    owner: 'varsha5595',
-    repo: 'constable-github-action'
+    owner: owner,
+    repo: repo
   })
+
   const pull_req = await request('GET /repos/:owner/:repo/pulls', {
-    owner: 'MeghanaVasist',
-    repo: 'constable-github-action'
+    owner: owner,
+    repo: repo
   })
 
-  console.log("Repo data")
-  console.log(repo_data)
+  const pull_closed = await request('GET /repos/:owner/:repo/pulls?state=closed', {
+    owner: owner,
+    repo: repo
+  })
 
-  console.log("Additions and Deletions")
-  console.log(add_del)
+  const closed_issue = await request('GET /repos/:owner/:repo/issues?state=closed', {
+    owner: owner,
+    repo: repo
+  })
 
-  console.log("Total commits over 52 weeks")
-  console.log(total_commits)
+  const open_issue = await request('GET /repos/:owner/:repo/issues', {
+    owner: owner,
+    repo: repo
+  })
 
-  console.log("Contributors")
-  console.log(contributors)
+  var avg_issue = 0
+  closed_issue.data.forEach(element => {
+    avg_issue += time(element.closed_at,element.created_at)
+  });
 
-  console.log("Commit Activity")
-  console.log(commit_activity)
+  avg_issue = avg_issue/(closed_issue.data.length + open_issue.data.length - pull_req.data.length)
 
   const result = await request('GET /repos/{owner}/{repo}/contents', {
-    owner: 'dangoslen',
-    repo: 'constable-github-action'
+    owner: owner,
+    repo: repo
   })
-  
+
+  var grade_keys = new Array()
+  var grade_vals = new Array()
   const files = new Set();
+  const reqFiles = new Set(['README.md', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md', 'LICENSE', 'CITATION.md', '.gitignore'])
+
   for (let i = 0; i < result.data.length; i++) {
     files.add(result.data[i].name)
   }
-  const dic = new Map()
-  const reqFiles = new Set(['README.md', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md', 'LICENSE', 'CITATION.md', '.gitignore'])
+
   reqFiles.forEach(file => {
+    grade_keys.push(file)
     if (files.has(file)) {
-      dic[file] = 1
+      grade_vals.push(1)
     }
     else {
-      dic[file] = 0
+      grade_vals.push(0)
     }
 
   });
-  console.log(dic)
-  console.log("Pull requests")
-  console.log(pull_req)
+
+  var PR = 0
+  console.log(pull_closed)
+  pull_closed.data.forEach(pullRequest => {
+    if (pullRequest.merged_at){
+      PR += time(pullRequest.merged_at, pullRequest.created_at)
+    }
+  });
+  PR = PR/(pull_req.data.length + pull_closed.data.length)
+
+  var score = grade_vals.reduce(function(a, b){
+    return a + b;
+  }, 0);
+
+  grade_keys.push("Average PR Closing Time")
+  grade_vals.push(Math.round(PR))
+
+  if (PR<10 && PR>0) {
+    score += 2
+  }
+
+  grade_keys.push("Average Issue Closing time")
+  grade_vals.push(Math.round(avg_issue))
+  if (avg_issue<10 && avg_issue>0) {
+    score += 2
+  }
+
+  console.log("Forks", repo_data.data["forks"])
+  console.log("Stars", repo_data.data["stargazers_count"])
+  console.log("Has Wiki", repo_data.data["has_wiki"])
+  console.log("Has Project", repo_data.data["has_projects"])
+  console.log("Additions and Deletions", add_del.data)
+  console.log("Contributors", contributors.data)
+  console.log("Commit Activity", commit_activity.data)
+  console.log("Table", grade_keys, grade_vals)
+  console.log("Assigned grade is ", calculateGrade(score * 10))
+  
 }
 
 
