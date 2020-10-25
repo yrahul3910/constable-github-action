@@ -29,7 +29,14 @@
 }
 
 .navbar{
-  color: white;
+  color: black;
+  position: fixed;
+  z-index: 100;
+}
+
+.btn-action-primary {
+  background-color: #4C00A4!important;
+  color: whitesmoke !important;
 }
 
 @keyframes App-logo-spin {
@@ -39,4 +46,33 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.stars-card {
+  background-image: linear-gradient(to right, #0F76A6, #2E9D99);
+}
+
+.forks-card {
+  background-image: linear-gradient(to right, #511B75, #973490);
+}
+
+.contributors-card {
+  background-image: linear-gradient(to right, #511B75, #973490);
+}
+
+.card {
+  min-height: 150px;
+}
+
+.card-icon {
+  position: absolute;
+  bottom: -2.5em;
+  right: -2.5em;
+  opacity: .3;
+}
+
+.icon-text {
+  color: white !important;
+  font-size: 12em !important;
+  overflow: hidden !important;
 }
