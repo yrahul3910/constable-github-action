@@ -19,7 +19,8 @@ function App() {
   const [cardData, setCardData] = useState({});
   const [gradedScore, setGradedScore] = useState('');
   const [commitActivityData, setCommitActivityData] = useState([]);
-  const [ isRepoDetailsLoaded, setIsRepoDetailsLoaded] = useState(false);
+  const [isRepoDetailsLoaded, setIsRepoDetailsLoaded] = useState(false);
+  const [gradeLink, setGradeLink] = useState('');
 
   const handleChange = (e) => {
     updateFormData({
@@ -41,6 +42,7 @@ function App() {
       setGradedScore(gradedScore);
       setCommitActivityData(commitActivityData);
       setIsRepoDetailsLoaded(true);
+      setGradeLink("https://img.shields.io/badge/Constable-".concat(gradedScore, "-green"));
     } catch (err) {
       console.log(err);
       setLoading(false);
@@ -58,6 +60,7 @@ function App() {
             <h6 className="page-subtitle small text-muted font-weight-bolder">
               Analyse how contributable a GitHub Repository is!
             </h6>
+            <img src={gradeLink} />
           </div>
         </div>
         <div className="col-9 mt-4 px-0">
