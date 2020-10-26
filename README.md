@@ -101,3 +101,28 @@ And now GitHub will know to use the action sourced under th `./dist` folder. You
 ```yaml
 uses: dangoslen/constable-github-action@<your-branch>
 ```
+## Executing Constable App
+
+Navigate to the project and run the following commands:
+
+```bash
+npm install
+npm run package
+```
+
+Run cd src/constable-app and then the following commands:
+
+```bash
+npm install
+npm start
+```
+
+This would run the server and you'll be able to see the UI in your browser. A sample of the UI is shown below:
+
+   <img alt="constable-github-action-coverage" src="./assets/dashboard.png">
+
+
+
+
+
+

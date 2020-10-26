@@ -2,17 +2,26 @@ import React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-function CommitHistory(commitActivityData) {
-    const chartdata = []
-    commitActivityData['commitActivityData'].forEach(week => {
-        const currentDate = new Date(week['week'] * 1000);
-        chartdata.push({
+function AddDeleteHistory(additionDeletionData) {
+    const additionData = []
+    const deletionData = []
+    additionDeletionData['additionDeletionData'].forEach(week => {
+        const currentDate = new Date(week[0] * 1000);
+        additionData.push({
             x: Date.UTC(
                 currentDate.getFullYear(),
                 currentDate.getMonth(),
                 currentDate.getDate()
             ),
-            y: week['total']
+            y: week[1]
+        });
+        deletionData.push({
+            x: Date.UTC(
+                currentDate.getFullYear(),
+                currentDate.getMonth(),
+                currentDate.getDate()
+            ),
+            y: week[2]
         });
     });
     const chartOptions = {
@@ -27,9 +36,8 @@ function CommitHistory(commitActivityData) {
             type: 'datetime'
         },
         yAxis: {
-            min: 0,
             title: {
-                text: 'Number of commits'
+                text: 'Number of lines of code'
             }
         },
         tooltip: {
@@ -47,10 +55,16 @@ function CommitHistory(commitActivityData) {
             }
         },
         series: [{
-            name: 'Commits',
-            data: chartdata,
-            color: '#4C00A4'
-        }]
+            name: 'Additions',
+            data: additionData,
+            color: '#009688'
+        },
+        {
+            name: 'Deletions',
+            data: deletionData,
+            color: '#c62828'
+        },
+        ]
     };
     return (
         <div>
@@ -59,4 +73,4 @@ function CommitHistory(commitActivityData) {
     )
 }
 
-export default CommitHistory;
+export default AddDeleteHistory;
