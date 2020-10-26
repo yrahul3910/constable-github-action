@@ -140,7 +140,7 @@ function App() {
                   <div className="card border-0 stars-card col-6">
                     <div className="card-body p-3 text-white">
                       <h6 className="text-uppercase">Contributors</h6>
-                      <h1 className="font-weight-bold">{cardData.contributorCount}</h1>
+                      <h1 className="font-weight-bold">{cardData.contributorCount > 99 ? cardData.contributorCount + '+' : cardData.contributorCount}</h1>
                     </div>
                     <div className="card-icon">
                       <i className="material-icons icon-text">group</i>
