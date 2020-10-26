@@ -39,7 +39,8 @@ const calculateGrade = (score) => {
 const getRepositoryDetails = async (owner, repository) => {
   let score = 0;
   let gradeData = {};
-  let gradeDataList = []
+  let gradeDataList = [];
+  let mergePullRequestCount = 0;
 
   const repo_data = await request('GET /repos/{owner}/{repo}', {
     owner: owner,
@@ -116,10 +117,12 @@ const getRepositoryDetails = async (owner, repository) => {
   });
 
   var PR = 0
-  console.log(pull_closed)
+  console.log(pull_closed);
+  console.log(pull_req);
   pull_closed.data.forEach(pullRequest => {
     if (pullRequest.merged_at) {
       PR += time(pullRequest.merged_at, pullRequest.created_at)
+      mergePullRequestCount += 1
     }
   });
   PR = PR / (pull_req.data.length + pull_closed.data.length)
@@ -133,6 +136,13 @@ const getRepositoryDetails = async (owner, repository) => {
   })
 
   const gradedScore = calculateGrade(score * 10);
+  const totalPullRequestCount = pull_req.data.length + mergePullRequestCount;
+  const openPRCount = (pull_req.data.length / totalPullRequestCount) * 100;
+  const mergePRCount = (mergePullRequestCount / totalPullRequestCount) * 100;
+  const totalIssueCount = closed_issue.data.length + open_issue.data.length - pull_req.data.length - pull_closed.data.length;
+  const closedIssueCount = ((closed_issue.data.length - pull_closed.data.length) / totalIssueCount) * 100;
+  const openIssueCount = ((open_issue.data.length - pull_req.data.length) / totalIssueCount) * 100
+
 
   console.log("Forks", repo_data.data["forks"])
   console.log("Stars", repo_data.data["stargazers_count"])
@@ -150,7 +160,14 @@ const getRepositoryDetails = async (owner, repository) => {
       forkCount: repo_data.data["forks"],
       contributorCount: contributors.data.length,
       releaseCount: 3
-    }
+    }, pulseData: {
+      openPRCount: openPRCount,
+      mergedPRCount: mergePRCount,
+      totalPRCount: totalPullRequestCount,
+      closedIssueCount: closedIssueCount,
+      openIssueCount: openIssueCount,
+      totalIssueCount: totalIssueCount
+    }, 
   };
 
 }

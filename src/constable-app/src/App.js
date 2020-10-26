@@ -22,6 +22,7 @@ function App() {
   const [commitActivityData, setCommitActivityData] = useState([]);
   const [isRepoDetailsLoaded, setIsRepoDetailsLoaded] = useState(false);
   const [additionDeletionData, setAdditionDeletionData] = useState([]);
+  const [pulseData, setPulseData] = useState({});
 
   const handleChange = (e) => {
     updateFormData({
@@ -36,7 +37,7 @@ function App() {
     setLoading(true);
     event.preventDefault();
     try {
-      const { gradeDataList, gradedScore, commitActivityData, additionDeletionData, cardData } = await getRepositoryDetails(formData.ownerName, formData.repositoryName);
+      const { gradeDataList, gradedScore, commitActivityData, additionDeletionData, cardData, pulseData } = await getRepositoryDetails(formData.ownerName, formData.repositoryName);
       setGradeDataList(gradeDataList);
       setCardData(cardData);
       setLoading(false);
@@ -44,6 +45,7 @@ function App() {
       setCommitActivityData(commitActivityData);
       setAdditionDeletionData(additionDeletionData);
       setIsRepoDetailsLoaded(true);
+      setPulseData(pulseData);
     } catch (err) {
       console.log(err);
       setLoading(false);
@@ -153,14 +155,45 @@ function App() {
               </div>
             </div>
           </div>
-          <div className="col-4 pr-2">
-            <div className="card">
+          <div className="col-4 pr-4">
+            <div className="row card mb-2">
               <div className="card-header">
-                Featured
+                Pulse
               </div>
               <div className="card-body">
-                <h5 className="card-title">Special title treatment</h5>
-                <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <div className="row">
+                  <div className="col">
+                    <div className="progress mb-2" style={{ height: '0.5rem' }}>
+                      <div className="progress-bar bg-success" role="progressbar" style={{ width: pulseData.openIssueCount + '%' }} aria-valuemin="0" aria-valuemax="100"></div>
+                      <div className="progress-bar" role="progressbar" style={{ width: '0.5%', backgroundColor: '#FFFFFF' }} aria-valuemin="0" aria-valuemax="100"></div>
+                      <div className="progress-bar bg-danger" role="progressbar" style={{ width: pulseData.closedIssueCount + '%' }} aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span>{pulseData.totalIssueCount} Active Issues</span>
+                  </div>
+                  <div className="col">
+                    <div className="progress mb-2" style={{ height: '0.5rem' }}>
+                      <div className="progress-bar" role="progressbar" style={{ width: pulseData.openPRCount + '%', backgroundColor: '#4C00A4' }} aria-valuemin="0" aria-valuemax="100"></div>
+                      <div className="progress-bar" role="progressbar" style={{ width: '0.5%', backgroundColor: '#FFFFFF' }} aria-valuemin="0" aria-valuemax="100"></div>
+                      <div className="progress-bar" role="progressbar" style={{ width: pulseData.mergedPRCount + '%', backgroundColor: '#29B59F' }} aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span>{pulseData.totalPRCount} Active Pull Requests</span>
+                  </div>
+                </div>
+                <hr></hr>
+                <div className="row">
+                  <div className="col text-success text-center font-weight-bolder">
+                    <span>Open Issues</span>
+                  </div>
+                  <div className="col  text-danger text-center font-weight-bolder">
+                    <span>Closed Issues</span>
+                  </div>
+                  <div className="col text-center font-weight-bolder" style={{ color: '#4C00A4' }}>
+                    <span>Merged Requests</span>
+                  </div>
+                  <div className="col text-center font-weight-bolder" style={{ color: '#29B59F' }}>
+                    <span>Open Requests</span>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="row">
@@ -168,7 +201,7 @@ function App() {
                 <div className="card">
                   <div className="card-header">
                     Addition Deletion Trend
-                </div>
+                  </div>
                   <div className="card-body">
                     < AddDeleteHistory additionDeletionData={additionDeletionData} />
                   </div>
@@ -181,7 +214,7 @@ function App() {
               <div className="card-header">
                 Grade Calculation
               </div>
-              <div className="card-body">
+              <div className="card-body table-responsive">
                 <table className="table table-striped">
                   <thead>
                     <tr>
