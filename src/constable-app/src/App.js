@@ -25,6 +25,7 @@ function App() {
   const [gradedScore, setGradedScore] = useState('');
   const [commitActivityData, setCommitActivityData] = useState([]);
   const [isRepoDetailsLoaded, setIsRepoDetailsLoaded] = useState(false);
+  const [gradeLink, setGradeLink] = useState('');
   const [additionDeletionData, setAdditionDeletionData] = useState([]);
   const [pulseData, setPulseData] = useState({});
 
@@ -55,6 +56,7 @@ function App() {
       setCommitActivityData(commitActivityData);
       setAdditionDeletionData(additionDeletionData);
       setIsRepoDetailsLoaded(true);
+      setGradeLink("https://img.shields.io/badge/Constable-".concat(gradedScore, "-green"));
       setPulseData(pulseData);
     } catch (err) {
       console.log(err);
@@ -225,6 +227,20 @@ function App() {
                 </div>
               </div>
               <div className="col-4 pl-2">
+                <div className="card mb-2">
+                <div className="card-header">
+                    Grade Badge
+                  </div>
+                  <div className="card-body">
+                    <img src={gradeLink} />
+                    <div>
+                      <h6>Copy this link to add it to your README!</h6>
+                      <div>
+                        {gradeLink}
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div className="card">
                   <div className="card-header">
                     Grade Calculation
