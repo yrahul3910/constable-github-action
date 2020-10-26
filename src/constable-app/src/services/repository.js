@@ -3,7 +3,7 @@ import { request } from "@octokit/request";
 
 const time = (timestamp1, timestamp2) => {
   let difference = Date.parse(timestamp1) - Date.parse(timestamp2);
-  let daysDifference = Math.floor(difference / 1000 / 60 / 60 / 24);
+  let daysDifference = Math.ceil(difference / 1000 / 60 / 60 / 24);
   return daysDifference;
 }
 
@@ -46,6 +46,9 @@ const getRepositoryDetails = async (owner, repository) => {
     owner: owner,
     repo: repository
   });
+  const watchers = repo_data.data["watchers"]
+  const openIssueCounts = repo_data.data["open_issues"]
+
   const repoMetaData = {
     name: repo_data.data['full_name'],
     url: repo_data['git_url']
@@ -55,19 +58,14 @@ const getRepositoryDetails = async (owner, repository) => {
     owner: owner,
     repo: repository
   });
+
   const additionDeletionData = add_del.data;
 
   const contributors = await request('GET /repos/:owner/:repo/stats/contributors', {
     owner: owner,
     repo: repository
   });
-
-  const commit_activity = await request('GET /repos/:owner/:repo/stats/commit_activity', {
-    owner: owner,
-    repo: repository
-  });
-  const commitActivityData = commit_activity.data;
-
+  
   const pull_req = await request('GET /repos/:owner/:repo/pulls', {
     owner: owner,
     repo: repository
@@ -83,17 +81,17 @@ const getRepositoryDetails = async (owner, repository) => {
     repo: repository
   });
 
-  const open_issue = await request('GET /repos/:owner/:repo/issues', {
-    owner: owner,
-    repo: repository
-  });
+  // const open_issue = await request('GET /repos/:owner/:repo/issues', {
+  //   owner: owner,
+  //   repo: repository
+  // });
 
   let averageIssue = 0
   closed_issue.data.forEach(element => {
     averageIssue += time(element.closed_at, element.created_at)
   });
 
-  averageIssue = averageIssue / (closed_issue.data.length + open_issue.data.length - pull_req.data.length)
+  averageIssue = averageIssue / closed_issue.data.length
 
   const result = await request('GET /repos/{owner}/{repo}/contents', {
     owner: owner,
@@ -101,23 +99,27 @@ const getRepositoryDetails = async (owner, repository) => {
   })
 
   const files = new Set();
-  const reqFiles = new Set(['README.md', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md', 'LICENSE', 'CITATION.md', '.gitignore'])
+  const reqFiles = new Array('README.md', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md', 'LICENSE', 'CITATION.md', '.gitignore')
+  const reqTempFiles = new Array('README', 'CONTRIBUTING', 'CODE_OF_CONDUCT', 'LICENSE', 'CITATION', 'GITIGNORE')
+  const fileWeights = new Array(2, 1, 0.5, 1, 0.5, 1)
 
   for (let i = 0; i < result.data.length; i++) {
     files.add(result.data[i].name)
   }
 
   reqFiles.forEach(file => {
-    gradeData[file] = { name: file, weight: 1, score: 0 }
+    const loc = reqFiles.indexOf(file)
+    gradeData[file] = { name: file, weight: fileWeights[loc], score: 0 }
   });
 
-  reqFiles.forEach(file => {
-    if (files.has(file)) {
-      gradeData[file]['score'] = 1
-    }
-    else {
-      gradeData[file]['score'] = 0
-    }
+  files.forEach(file => {
+    var check = file.toUpperCase()    
+    reqTempFiles.forEach( template => {
+      const loc = reqTempFiles.indexOf(template)
+      if (check.includes(template)) {
+        gradeData[reqFiles[loc]]['score'] = fileWeights[loc]
+      }  
+    })
   });
 
   var PR = 0
@@ -127,7 +129,7 @@ const getRepositoryDetails = async (owner, repository) => {
       mergePullRequestCount += 1
     }
   });
-  PR = PR / (pull_req.data.length + pull_closed.data.length)
+  PR = PR / pull_closed.data.length
 
   gradeData = { ...gradeData, "Average PR Closing Time": { name: "Average PR Closing Time", weight: 2, score: (Math.round(PR) < 10 && Math.round(PR) > 0) ? 2 : 0 } }
   gradeData = { ...gradeData, "Average Issue Closing time": { name: "Average Issue Closing time", weight: 2, score: (averageIssue < 10 && averageIssue > 0) ? 2 : 0 } }
@@ -138,14 +140,17 @@ const getRepositoryDetails = async (owner, repository) => {
   })
 
   const gradedScore = calculateGrade(score * 10);
-  const totalPullRequestCount = pull_req.data.length + mergePullRequestCount;
+  var totalPullRequestCount = pull_req.data.length + mergePullRequestCount;
+  totalPullRequestCount = (totalPullRequestCount === 0) ? 30 : totalPullRequestCount
   const openPRCount = (pull_req.data.length / totalPullRequestCount) * 100;
   const mergePRCount = (mergePullRequestCount / totalPullRequestCount) * 100;
-  const totalIssueCount = closed_issue.data.length + open_issue.data.length - pull_req.data.length - pull_closed.data.length;
-  const closedIssueCount = ((closed_issue.data.length - pull_closed.data.length) / totalIssueCount) * 100;
-  const openIssueCount = ((open_issue.data.length - pull_req.data.length) / totalIssueCount) * 100
 
+  var totalIssueCount = closed_issue.data.length + openIssueCounts - pull_req.data.length - pull_closed.data.length;
+  const closedIssueCount = closed_issue.data.length === 30 ? 50 : closed_issue.data.length
 
+  totalIssueCount = (totalIssueCount === 0) ? 30 : totalIssueCount
+
+  // const openIssueCount = ((open_issue.data.length - pull_req.data.length) / totalIssueCount) * 100
   // console.log("Forks", repo_data.data["forks"])
   // console.log("Stars", repo_data.data["stargazers_count"])
   // console.log("Has Wiki", repo_data.data["has_wiki"])
@@ -155,19 +160,28 @@ const getRepositoryDetails = async (owner, repository) => {
   // console.log("Commit Activity", commitActivityData)
   // console.log("Table", gradeDataList)
   // console.log("Assigned grade is ", calculateGrade(score * 10))
+  // console.log("Issues Open ", open_issue)
+  // console.log("Issues Closed ", closed_issue)
 
+  const commit_activity = await request('GET /repos/:owner/:repo/stats/commit_activity', {
+    owner: owner,
+    repo: repository
+  });
+  const commitActivityData = commit_activity.data;
+
+  console.log("Shivas", gradeDataList, gradedScore)
   return {
     repoMetaData, gradeDataList, gradedScore, commitActivityData, additionDeletionData, cardData: {
       starCount: repo_data.data["stargazers_count"],
       forkCount: repo_data.data["forks"],
       contributorCount: contributors.data.length,
-      releaseCount: 3
+      watcherCount: watchers
     }, pulseData: {
       openPRCount: openPRCount,
       mergedPRCount: mergePRCount,
       totalPRCount: totalPullRequestCount,
       closedIssueCount: closedIssueCount,
-      openIssueCount: openIssueCount,
+      openIssueCount: Math.min(50, openIssueCounts),
       totalIssueCount: totalIssueCount
     },
   };

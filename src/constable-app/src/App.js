@@ -149,8 +149,8 @@ function App() {
                   <div className="col-1"></div>
                   <div className="card border-0 contributors-card col-5">
                     <div className="card-body p-3 text-white">
-                      <h6 className="text-uppercase">Releases</h6>
-                      <h1 className="font-weight-bold">{cardData.releaseCount}</h1>
+                      <h6 className="text-uppercase">Watchers</h6>
+                      <h1 className="font-weight-bold">{cardData.watcherCount}</h1>
                     </div>
                     <div className="card-icon">
                       <i className="material-icons icon-text">local_offer</i>
@@ -183,13 +183,13 @@ function App() {
                           <div className="progress-bar" role="progressbar" style={{ width: '0.5%', backgroundColor: '#FFFFFF' }} aria-valuemin="0" aria-valuemax="100"></div>
                           <div className="progress-bar bg-danger" role="progressbar" style={{ width: pulseData.closedIssueCount + '%' }} aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <span>{pulseData.totalIssueCount} Active Issues</span>
+                        <span>{pulseData.openIssueCount} Active Issues</span>
                       </div>
                       <div className="col">
                         <div className="progress mb-2" style={{ height: '0.5rem' }}>
-                          <div className="progress-bar" role="progressbar" style={{ width: pulseData.openPRCount + '%', backgroundColor: '#4C00A4' }} aria-valuemin="0" aria-valuemax="100"></div>
+                          <div className="progress-bar" role="progressbar" style={{ width: pulseData.mergedPRCount + '%', backgroundColor: '#4C00A4' }} aria-valuemin="0" aria-valuemax="100"></div>
                           <div className="progress-bar" role="progressbar" style={{ width: '0.5%', backgroundColor: '#FFFFFF' }} aria-valuemin="0" aria-valuemax="100"></div>
-                          <div className="progress-bar" role="progressbar" style={{ width: pulseData.mergedPRCount + '%', backgroundColor: '#29B59F' }} aria-valuemin="0" aria-valuemax="100"></div>
+                          <div className="progress-bar" role="progressbar" style={{ width: pulseData.openPRCount + '%', backgroundColor: '#29B59F' }} aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <span>{pulseData.totalPRCount} Active Pull Requests</span>
                       </div>
