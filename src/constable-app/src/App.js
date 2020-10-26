@@ -4,6 +4,7 @@ import React, { useCallback, useState } from "react";
 import { getRepositoryDetails } from './services';
 import Loading from './assets/loading';
 import CommitHistory from './components/commit-history';
+import AddDeleteHistory from './components/add-delete-history';
 
 function App() {
 
@@ -19,7 +20,8 @@ function App() {
   const [cardData, setCardData] = useState({});
   const [gradedScore, setGradedScore] = useState('');
   const [commitActivityData, setCommitActivityData] = useState([]);
-  const [ isRepoDetailsLoaded, setIsRepoDetailsLoaded] = useState(false);
+  const [isRepoDetailsLoaded, setIsRepoDetailsLoaded] = useState(false);
+  const [additionDeletionData, setAdditionDeletionData] = useState([]);
 
   const handleChange = (e) => {
     updateFormData({
@@ -34,12 +36,13 @@ function App() {
     setLoading(true);
     event.preventDefault();
     try {
-      const { gradeDataList, gradedScore, commitActivityData, cardData } = await getRepositoryDetails(formData.ownerName, formData.repositoryName);
+      const { gradeDataList, gradedScore, commitActivityData, additionDeletionData, cardData } = await getRepositoryDetails(formData.ownerName, formData.repositoryName);
       setGradeDataList(gradeDataList);
       setCardData(cardData);
       setLoading(false);
       setGradedScore(gradedScore);
       setCommitActivityData(commitActivityData);
+      setAdditionDeletionData(additionDeletionData);
       setIsRepoDetailsLoaded(true);
     } catch (err) {
       console.log(err);
@@ -114,7 +117,7 @@ function App() {
                 </div>
               </div>
             </div>
-            <div className="row">
+            <div className="row mb-2">
               <div className="card border-0 stars-card col-6">
                 <div className="card-body p-3 text-white">
                   <h6 className="text-uppercase">Contributors</h6>
@@ -137,6 +140,18 @@ function App() {
                 </div>
               </div>
             </div>
+            <div className="row">
+              <div className="col-12 pl-0">
+                <div className="card">
+                  <div className="card-header">
+                    Code commit trend
+                </div>
+                  <div className="card-body">
+                    <CommitHistory commitActivityData={commitActivityData} />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="col-4 pr-2">
             <div className="card">
@@ -146,6 +161,18 @@ function App() {
               <div className="card-body">
                 <h5 className="card-title">Special title treatment</h5>
                 <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-12 pl-0">
+                <div className="card">
+                  <div className="card-header">
+                    Addition Deletion Trend
+                </div>
+                  <div className="card-body">
+                    < AddDeleteHistory additionDeletionData={additionDeletionData} />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -183,8 +210,7 @@ function App() {
               </div>
             </div>
           </div>
-          <CommitHistory commitActivityData={commitActivityData}/>
-        </div> :null : null}
+        </div> : null : null}
       </div>
     </div>
   );

@@ -50,6 +50,7 @@ const getRepositoryDetails = async (owner, repository) => {
     owner: owner,
     repo: repository
   })
+  const additionDeletionData = add_del.data;
 
   const contributors = await request('GET /repos/:owner/:repo/stats/contributors', {
     owner: owner,
@@ -142,9 +143,9 @@ const getRepositoryDetails = async (owner, repository) => {
   console.log("Commit Activity", commitActivityData)
   console.log("Table", gradeDataList)
   console.log("Assigned grade is ", calculateGrade(score * 10))
-  
+
   return {
-    gradeDataList, gradedScore, commitActivityData, cardData: {
+    gradeDataList, gradedScore, commitActivityData, additionDeletionData, cardData: {
       starCount: repo_data.data["stargazers_count"],
       forkCount: repo_data.data["forks"],
       contributorCount: contributors.data.length,
