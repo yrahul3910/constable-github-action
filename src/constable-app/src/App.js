@@ -75,7 +75,6 @@ function App() {
             <h6 className="page-subtitle small text-muted font-weight-bolder">
               Analyse how contributable a GitHub Repository is!
             </h6>
-            <img src={gradeLink} />
           </div>
         </div>
         <div className="mt-4 px-0">
@@ -228,6 +227,20 @@ function App() {
                 </div>
               </div>
               <div className="col-4 pl-2">
+                <div className="card mb-2">
+                <div className="card-header">
+                    Grade Badge
+                  </div>
+                  <div className="card-body">
+                    <img src={gradeLink} />
+                    <div>
+                      <h6>Copy this link to add it to your README!</h6>
+                      <div>
+                        {gradeLink}
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div className="card">
                   <div className="card-header">
                     Grade Calculation
