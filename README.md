@@ -7,6 +7,7 @@
   <a href="https://github.com/dangoslen/constable-github-action/actions"><img alt="constable-github-action-status" src="https://github.com/dangoslen/constable-github-action/workflows/units-test/badge.svg"></a>
   <img alt="constable-github-action-coverage" src="./assets/coverage-badge.svg">
   <img src="https://zenodo.org/badge/291103669.svg" alt="DOI" />
+  <img src="https://img.shields.io/badge/Constable-A+-green" />
   
   [![Watch the video](https://github.com/MeghanaVasist/constable-github-action/blob/main/assets/video_thumbnail.png)](https://youtu.be/kizuzz0sTdM)
   
@@ -16,7 +17,7 @@
 
 ---
 
-Constable is a web application that grades your repositories contributability. It is available as a Github badge which developers can add to their repositories and the contributors can use it to get a first glance of the project quality without putting a lot of effort. It also provides a simple add action to any GitHub Actions workflow you like and start seeing how contributable your repository is. A sample workflow is provided below:
+Constable is a web application that grades the contributability of a repository. It provides as a Github badge which developers can add to their repositories and the contributors can use it to get a first glance of the project quality without putting a lot of effort. It displays the entire grade report along with the link for the badge in a Dashboard which can be manually added to the repository. It also provides a simple add action to any GitHub Actions workflow you like and start seeing how contributable your repository is. A sample workflow is provided below:
 
 ```yaml
 name: "units-test"
@@ -45,6 +46,9 @@ jobs:
 ```
 
 This workflow checks out the repository, grades it with Constable, and supplies the grade and the report to the pull request as a comment. You can combine Constable with whatever workflow you like!
+
+## Sample Dashboard
+<img alt="Dashboard" src="https://github.com/MeghanaVasist/constable-github-action/blob/main/assets/Dashboard.JPG"/>
 
 ## Contributability Grade
 
@@ -99,30 +103,32 @@ Since the packaged `index.js` is run from the `./dist` folder.
 git add dist
 ```
 
-And now GitHub will know to use the action sourced under th `./dist` folder. You could use it in a workflow like 
+And now GitHub will know to use the action sourced under the `./dist` folder. You could use it in a workflow like 
 
 ```yaml
 uses: dangoslen/constable-github-action@<your-branch>
 ```
 ## Executing Constable App
 
-Navigate to the project and run the following commands:
+From the root folder run the following commands:
 
 ```bash
-npm install
-npm run package
-```
-
-Run cd src/constable-app and then the following commands:
-
-```bash
+cd src/constable-app
 npm install
 npm start
 ```
-
 This would run the server and you'll be able to see the UI in your browser. A sample of the UI is shown below:
 
-   <img alt="constable-github-action-coverage" src="./assets/dashboard.png">
+   <img alt="sample UI" src="./assets/dashboard.png" />
+   
+Now key in the username and repository name to get the statistics and grade for your repository! Here is the grade report for Zephyr:
+<img alt="Dashboard" src="./assets/Dashboard.JPG" />
+
+Before you push the code, run the following command to build the code:
+```bash
+npm run package
+```
+
 
 
 
