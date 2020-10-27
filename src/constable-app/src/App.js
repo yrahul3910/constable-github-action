@@ -232,7 +232,7 @@ function App() {
                     Grade Badge
                   </div>
                   <div className="card-body">
-                    <img src={gradeLink} />
+                    <img src={gradeLink} alt="Constable Badge" />
                     <div>
                       <h6>Copy this link to add it to your README!</h6>
                       <div>

@@ -2,10 +2,10 @@ import React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-function AddDeleteHistory(additionDeletionData) {
+function AddDeleteHistory({ additionDeletionData }) {
     const additionData = []
     const deletionData = []
-    additionDeletionData['additionDeletionData'].forEach(week => {
+    additionDeletionData.forEach(week => {
         const currentDate = new Date(week[0] * 1000);
         additionData.push({
             x: Date.UTC(
