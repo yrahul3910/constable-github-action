@@ -17,6 +17,9 @@
   
 </div>
 
+## Testing for Phase 3
+For the experimental setup in Phase 3, the tester will be given 5 repositories to test and rank based on the ease of contributability. The tester will be required to manually evaluate the contributability of each repository and rank them based on the tester's order of contributability and record the time taken. Then, they will be given the Constable webapp to evaluate the same 5 repositories and rank the repositories and record the time taken. The time taken and the ease of ranking can be used as the evaluation metrics for evaluating the Constable app. Since the app is deployed on netlify, there is no setup overhead involved which saves time during the lab session.
+
 ---
 
 Constable is a web application that grades the contributability of a repository. It provides as a Github badge which developers can add to their repositories and the contributors can use it to get a first glance of the project quality without putting a lot of effort. It displays the entire grade report along with the link for the badge in a Dashboard which can be manually added to the repository. It also provides a simple add action to any GitHub Actions workflow you like and start seeing how contributable your repository is. A sample workflow is provided below:
