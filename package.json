@@ -36,7 +36,8 @@
     "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",
     "markdown-table": "^2.0.0",
-    "package": "^1.0.1"
+    "package": "^1.0.1",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.24.1",
