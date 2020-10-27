@@ -16,7 +16,7 @@
 
 ---
 
-Constable is a simple GitHub action to grade your repositories contributability. Simple add the action to any GitHub Actions workflow you like and start seeing how contributable your repository is. A sample workflow is provided below:
+Constable is a web application that grades your repositories contributability. It is available as a Github badge which developers can add to their repositories and the contributors can use it to get a first glance of the project quality without putting a lot of effort. It also provides a simple add action to any GitHub Actions workflow you like and start seeing how contributable your repository is. A sample workflow is provided below:
 
 ```yaml
 name: "units-test"
@@ -56,9 +56,12 @@ Constable looks for the presence of files that are associated with making it eas
 
 * Presence of a `README.md` file
 * Presence of a `CONTRIBUTING.md` file
-* Presence of a `CODE_OF_CONDUCT.md` file.
-
-In the future, we plan to implement additional checks, as well as use sentiment analysis to make sure the files referenced are readable, reasonable, and non-judgemental.
+* Presence of a `CODE_OF_CONDUCT.md` file
+* Presence of a `License` file
+* Presence of a `Citation` file
+* Presence of a `.gitignore` file
+* Average pull request closing time
+* Average issue closing time
 
 ### What Makes a Repository Contributable to You?
 
@@ -101,3 +104,28 @@ And now GitHub will know to use the action sourced under th `./dist` folder. You
 ```yaml
 uses: dangoslen/constable-github-action@<your-branch>
 ```
+## Executing Constable App
+
+Navigate to the project and run the following commands:
+
+```bash
+npm install
+npm run package
+```
+
+Run cd src/constable-app and then the following commands:
+
+```bash
+npm install
+npm start
+```
+
+This would run the server and you'll be able to see the UI in your browser. A sample of the UI is shown below:
+
+   <img alt="constable-github-action-coverage" src="./assets/dashboard.png">
+
+
+
+
+
+
