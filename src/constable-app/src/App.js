@@ -181,9 +181,9 @@ function App() {
                     <div className="row">
                       <div className="col">
                         <div className="progress mb-2" style={{ height: '0.5rem' }}>
-                          <div className="progress-bar bg-success" role="progressbar" style={{ width: pulseData.openIssueCount + '%' }} aria-valuemin="0" aria-valuemax="100"></div>
+                          <div className="progress-bar bg-success" role="progressbar" style={{ width: (pulseData.openIssueCount * 100 / pulseData.totalIssueCountPercentage) + '%' }} aria-valuemin="0" aria-valuemax="100"></div>
                           <div className="progress-bar" role="progressbar" style={{ width: '0.5%', backgroundColor: '#FFFFFF' }} aria-valuemin="0" aria-valuemax="100"></div>
-                          <div className="progress-bar bg-danger" role="progressbar" style={{ width: pulseData.closedIssueCount + '%' }} aria-valuemin="0" aria-valuemax="100"></div>
+                          <div className="progress-bar bg-danger" role="progressbar" style={{ width: (pulseData.closedIssueCount * 100 / pulseData.totalIssueCountPercentage) + '%' }} aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <span>{pulseData.totalIssueCount} Active Issues</span>
                       </div>

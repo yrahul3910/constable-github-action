@@ -169,7 +169,8 @@ const getRepositoryDetails = async (owner, repository) => {
       totalPRCount: totalPullRequestCount,
       closedIssueCount: closedIssueCount,
       openIssueCount: Math.min(50, openIssueCounts),
-      totalIssueCount: issueCount
+      totalIssueCount: issueCount,
+      totalIssueCountPercentage: Math.min(100, issueCount)
     },
   };
 
