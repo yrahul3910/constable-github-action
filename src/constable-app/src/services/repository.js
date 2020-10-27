@@ -99,9 +99,9 @@ const getRepositoryDetails = async (owner, repository) => {
   })
 
   const files = new Set();
-  const reqFiles = new Array('README.md', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md', 'LICENSE', 'CITATION.md', '.gitignore')
-  const reqTempFiles = new Array('README', 'CONTRIBUTING', 'CODE_OF_CONDUCT', 'LICENSE', 'CITATION', 'GITIGNORE')
-  const fileWeights = new Array(2, 1, 0.5, 1, 0.5, 1)
+  const reqFiles = ['README.md', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md', 'LICENSE', 'CITATION.md', '.gitignore']
+  const reqTempFiles = ['README', 'CONTRIBUTING', 'CODE_OF_CONDUCT', 'LICENSE', 'CITATION', 'GITIGNORE']
+  const fileWeights = [2, 1, 0.5, 1, 0.5, 1]
 
   for (let i = 0; i < result.data.length; i++) {
     files.add(result.data[i].name)
@@ -149,19 +149,6 @@ const getRepositoryDetails = async (owner, repository) => {
   const closedIssueCount = closed_issue.data.length === 30 ? 50 : closed_issue.data.length
 
   totalIssueCount = (totalIssueCount === 0) ? 30 : totalIssueCount
-
-  // const openIssueCount = ((open_issue.data.length - pull_req.data.length) / totalIssueCount) * 100
-  // console.log("Forks", repo_data.data["forks"])
-  // console.log("Stars", repo_data.data["stargazers_count"])
-  // console.log("Has Wiki", repo_data.data["has_wiki"])
-  // console.log("Has Project", repo_data.data["has_projects"])
-  // console.log("Additions and Deletions", add_del.data)
-  // console.log("Contributors", contributors.data)
-  // console.log("Commit Activity", commitActivityData)
-  // console.log("Table", gradeDataList)
-  // console.log("Assigned grade is ", calculateGrade(score * 10))
-  // console.log("Issues Open ", open_issue)
-  // console.log("Issues Closed ", closed_issue)
 
   const commit_activity = await request('GET /repos/:owner/:repo/stats/commit_activity', {
     owner: owner,
