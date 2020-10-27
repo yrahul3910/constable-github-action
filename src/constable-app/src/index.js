@@ -5,13 +5,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 // Constable Imports
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Router from './router';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router />
   </React.StrictMode>,
   document.getElementById('root')
 );
