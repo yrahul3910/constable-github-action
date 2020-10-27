@@ -2,9 +2,9 @@ import React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-function CommitHistory(commitActivityData) {
+function CommitHistory({ commitActivityData }) {
     const chartdata = []
-    commitActivityData['commitActivityData'].forEach(week => {
+    commitActivityData.forEach(week => {
         const currentDate = new Date(week['week'] * 1000);
         chartdata.push({
             x: Date.UTC(
