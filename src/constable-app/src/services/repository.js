@@ -146,6 +146,7 @@ const getRepositoryDetails = async (owner, repository) => {
   const mergePRCount = (mergePullRequestCount / totalPullRequestCount) * 100;
 
   var totalIssueCount = closed_issue.data.length + openIssueCounts - pull_req.data.length - pull_closed.data.length;
+  let issueCount = totalIssueCount;
   const closedIssueCount = closed_issue.data.length === 30 ? 50 : closed_issue.data.length
 
   totalIssueCount = (totalIssueCount === 0) ? 30 : totalIssueCount
@@ -156,7 +157,6 @@ const getRepositoryDetails = async (owner, repository) => {
   });
   const commitActivityData = commit_activity.data;
 
-  console.log("Shivas", gradeDataList, gradedScore)
   return {
     repoMetaData, gradeDataList, gradedScore, commitActivityData, additionDeletionData, cardData: {
       starCount: repo_data.data["stargazers_count"],
@@ -169,7 +169,7 @@ const getRepositoryDetails = async (owner, repository) => {
       totalPRCount: totalPullRequestCount,
       closedIssueCount: closedIssueCount,
       openIssueCount: Math.min(50, openIssueCounts),
-      totalIssueCount: totalIssueCount
+      totalIssueCount: issueCount
     },
   };
 
