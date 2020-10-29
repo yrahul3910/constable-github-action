@@ -3,8 +3,6 @@
   <h1>Constable</h1>
 
   <h2>Keeping repositories contributable.</h2>
-  <h2>Check out the <a href="https://5f9835f7f284f1a827a9681c--jovial-bose-1694a3.netlify.app/" target="_blank">demo</a> of the Constable App!</h2>
-  <h2>Now available as a Github Action. Check it out!!!</h2>
 
   <a href="https://github.com/dangoslen/constable-github-action/actions"><img alt="constable-github-action-status" src="https://github.com/dangoslen/constable-github-action/workflows/units-test/badge.svg"></a>
   <img alt="constable-github-action-coverage" src="./assets/coverage-badge.svg">
@@ -16,9 +14,6 @@
   <!--[![Constable](http://img.youtube.com/vi/NXANSl0S1xA/0.jpg)](http://www.youtube.com/watch?v=NXANSl0S1xA "Constable")--->
   
 </div>
-
-## Testing for Phase 3
-For the experimental setup in Phase 3, the tester will be given 5 repositories to test and rank based on the ease of contributability. The tester will be required to manually evaluate the contributability of each repository and rank them based on the tester's order of contributability and record the time taken. Then, they will be given the Constable webapp to evaluate the same 5 repositories and rank the repositories and record the time taken. The time taken and the ease of ranking can be used as the evaluation metrics for evaluating the Constable app. Since the app is deployed on netlify, there is no setup overhead involved which saves time during the lab session.
 
 ---
 
