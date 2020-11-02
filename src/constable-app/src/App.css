@@ -9,6 +9,21 @@
   color: whitesmoke !important;
 }
 
+.btn-action-question {
+  background-color: #00BFFF!important;
+  color: whitesmoke !important;
+  float: right
+}
+
+#grade-explaination {
+  width: 100%;
+  padding: 30px 0;
+  text-align: left;
+  background-color: lightblue;
+  margin-top: 60px;
+  display: none;
+}
+
 .stars-card {
   background-image: linear-gradient(to right, #0F76A6, #2E9D99);
 }

@@ -38,6 +38,14 @@ function App() {
     });
   };
 
+  const expshow = () => {
+    var x = document.getElementById("grade-explaination");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
   // Fecth all the details of a given GitHub repository
   const getRepoDetails = useCallback(async (event) => {
     setIsRepositorySet(true);
@@ -271,6 +279,25 @@ function App() {
                         </tr>
                       </tbody>
                     </table>
+                    <button className="btn-action-question btn w-10" onClick={expshow}>how we calculate grade</button>
+                    <div id="grade-explaination">
+                        Constable ranks contributability in "letter grades". A+/-, B+/-, C+/-, D+/-, F.
+                        The letter grades is determined from the raw percentage using
+                        a 10 point scale where the +/- is the top 3 points and bottom 3 points of each 10 point range.
+                        e.g. score >= 9 is A+/-, score >= 8 is B+/- etc. below 6 is F.
+                        Constable looks for the presence of files that are associated with making it easy to contribute,
+                         as well as signs the repository is active. We currently use the following
+
+                        Presence of a README.md file => weight 2,
+                        Presence of a CONTRIBUTING.md file => weight 1,
+                        Presence of a CODE_OF_CONDUCT.md file => weight 0.5,
+                        Presence of a License file => weight 1,
+                        Presence of a Citation file => weight 0.5,
+                        Presence of a .gitignore file => weight 1,
+                        Average pull request closing time => weight 2,
+                        Average issue closing time => weight 2,
+                        consider finer granularity, we also provide the raw percentage from 0 - 100 and a report in a .md format.
+                    </div>
                   </div>
                 </div>
               </div>
