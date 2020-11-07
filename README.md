@@ -110,7 +110,9 @@ uses: dangoslen/constable-github-action@<your-branch>
 ```
 ## Executing Constable App
 
-From the root folder run the following commands:
+Do not run ```npm install``` in project root folder 
+
+instead, from the root folder run the following commands:
 
 ```bash
 cd src/constable-app
