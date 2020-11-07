@@ -36,6 +36,35 @@ const calculateGrade = (score) => {
   return grade;
 }
 
+const setBadgeType = (score) => {
+  let badgeType = "badge badge-pill badge-danger";
+  if (score >= 95) {
+    badgeType = "badge badge-pill badge-success";
+  }
+  if (score >= 90 && score <= 94) {
+    badgeType = "badge badge-pill badge-success";
+  }
+  if (score >= 85 && score <= 89) {
+    badgeType = "badge badge-pill badge-warning";
+  }
+  if (score >= 80 && score <= 84) {
+    badgeType = "badge badge-pill badge-warning";
+  }
+  if (score >= 75 && score <= 79) {
+    badgeType = "badge badge-pill badge-secondary";
+  }
+  if (score >= 70 && score <= 74) {
+    badgeType = "badge badge-pill badge-secondary";
+  }
+  if (score >= 65 && score <= 69) {
+    badgeType = "badge badge-pill badge-dark";
+  }
+  if (score >= 60 && score <= 64) {
+    badgeType = "badge badge-pill badge-dark";
+  }
+  return badgeType;
+}
+
 const getRepositoryDetails = async (owner, repository) => {
   let score = 0;
   let gradeData = {};
@@ -140,6 +169,7 @@ const getRepositoryDetails = async (owner, repository) => {
   })
 
   const gradedScore = calculateGrade(score * 10);
+  const gradeBadge = setBadgeType(score * 10)
   var totalPullRequestCount = pull_req.data.length + mergePullRequestCount;
   totalPullRequestCount = (totalPullRequestCount === 0) ? 30 : totalPullRequestCount
   const openPRCount = (pull_req.data.length / totalPullRequestCount) * 100;
@@ -158,7 +188,7 @@ const getRepositoryDetails = async (owner, repository) => {
   const commitActivityData = commit_activity.data;
 
   return {
-    repoMetaData, gradeDataList, gradedScore, commitActivityData, additionDeletionData, cardData: {
+    repoMetaData, gradeDataList, gradedScore, commitActivityData, additionDeletionData, gradeBadge, cardData: {
       starCount: repo_data.data["stargazers_count"],
       forkCount: repo_data.data["forks"],
       contributorCount: contributors.data.length,

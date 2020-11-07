@@ -28,6 +28,7 @@ function App() {
   const [gradeLink, setGradeLink] = useState('');
   const [additionDeletionData, setAdditionDeletionData] = useState([]);
   const [pulseData, setPulseData] = useState({});
+  const [gradeBadge, setGradeBadge] = useState('');
 
   // Handle updates made to repository details form
   const handleChange = (e) => {
@@ -47,7 +48,7 @@ function App() {
     event.preventDefault();
 
     try {
-      const { repoMetaData, gradeDataList, gradedScore, commitActivityData, additionDeletionData, cardData, pulseData } = await getRepositoryDetails(formData.ownerName, formData.repositoryName);
+      const { repoMetaData, gradeDataList, gradedScore, commitActivityData, additionDeletionData, gradeBadge, cardData, pulseData } = await getRepositoryDetails(formData.ownerName, formData.repositoryName);
       setRepoMetaData(repoMetaData);
       setGradeDataList(gradeDataList);
       setCardData(cardData);
@@ -58,6 +59,8 @@ function App() {
       setIsRepoDetailsLoaded(true);
       setGradeLink("https://img.shields.io/badge/Constable-".concat(gradedScore, "-green"));
       setPulseData(pulseData);
+      setGradeBadge(gradeBadge);
+      console.log(gradedScore)
     } catch (err) {
       console.log(err);
       setLoading(false);
@@ -267,7 +270,7 @@ function App() {
                         <tr>
                           <th scope="row">9</th>
                           <th colSpan="2">Final Grade</th>
-                          <td><span className="badge badge-pill badge-success">{gradedScore}</span></td>
+                          <td><span className={gradeBadge}>{gradedScore}</span></td>
                         </tr>
                       </tbody>
                     </table>
