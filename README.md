@@ -5,7 +5,6 @@
   <h2>Keeping repositories contributable.</h2>
 
   <a href="https://github.com/dangoslen/constable-github-action/actions"><img alt="constable-github-action-status" src="https://github.com/dangoslen/constable-github-action/workflows/units-test/badge.svg"></a>
-  <img alt="constable-github-action-coverage" src="./assets/coverage-badge.svg">
   <img src="https://zenodo.org/badge/291103669.svg" alt="DOI" />
   <img src="https://img.shields.io/badge/Constable-A+-green" />
   
